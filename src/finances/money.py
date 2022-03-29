@@ -4,12 +4,12 @@ from dataclasses import dataclass
 
 CENTS_PER_DOLLAR = 100
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, order=True)
 class Money:
     _cents: int
 
     @staticmethod
-    def of(dollars: int, cents: int) -> Money:
+    def of(dollars: int, cents: int = 0) -> Money:
         assert cents >= 0 and cents < CENTS_PER_DOLLAR, (
             f"cents must be between 0 and {CENTS_PER_DOLLAR}"
         )
