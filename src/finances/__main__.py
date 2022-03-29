@@ -6,7 +6,7 @@ from .earnings import Earnings
 from .money import Money, ZERO
 
 def main():
-    income = Earnings(gross_income=Money(5000000), deductions=ZERO)
+    income = Earnings(gross_income=Money.of(50000, 0), deductions=ZERO)
     print(income.agi())
     return 0
 
