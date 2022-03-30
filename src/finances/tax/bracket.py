@@ -11,7 +11,8 @@ class Bracket:
     threshold: Money
 
 class BracketTax:
-    def __init__(self, brackets: list[Bracket]):
+    def __init__(self, brackets: list[Bracket], allow_deductions: bool):
+        self.allow_deductions = allow_deductions
         self.brackets = sorted(
             brackets,
             key=lambda b: b.threshold,
@@ -20,11 +21,11 @@ class BracketTax:
 
     def calculate(self, earnings: Earnings) -> Money:
         tax = ZERO
-        agi = earnings.agi()
+        taxable_income = earnings.taxable_income(self.allow_deductions)
         for bracket in self.brackets:
-            if agi > bracket.threshold:
+            if taxable_income > bracket.threshold:
                 tax += (
-                    agi - bracket.threshold
+                    taxable_income - bracket.threshold
                 ).grow_and_round(bracket.marginal_rate)
-                agi = bracket.threshold
+                taxable_income = bracket.threshold
         return tax
