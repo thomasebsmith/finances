@@ -2,7 +2,7 @@
 
 import sys
 
-from .earnings import Earnings
+from .earnings import Earnings, EarningsTaxPolicy
 from .money import Money
 from .tax import Bracket, BracketTax
 
@@ -15,7 +15,7 @@ def main():
         Bracket(0.22,  Money.of(40525)),
         Bracket(0.12,   Money.of(9950)),
         Bracket(0.10,      Money.of(0)),
-    ], allow_deductions=True)
+    ], policy=EarningsTaxPolicy(allow_deductions=True))
     income = Earnings(gross_income=Money.of(100000), deductions=Money.of(12550))
     print(bt.calculate(income))
     return 0
