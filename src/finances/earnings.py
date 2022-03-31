@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from .money import Money
+from .money import Money, ZERO
 
 @dataclass(frozen=True)
 class EarningsTaxPolicy:
@@ -17,6 +17,11 @@ class EarningsTaxPolicy:
 class Earnings:
     gross_income: Money
     deductions: Money
+    magi_additions: Money
+
+    def __post_init__(self):
+        assert self.deductions >= ZERO, "deductions must be positive"
+        assert self.magi_additions >= ZERO, "MAGI additions must be positive"
 
     def taxable_income(self, policy: EarningsTaxPolicy) -> Money:
         income = self.agi() if policy.allow_deductions else self.gross_income
@@ -30,3 +35,6 @@ class Earnings:
 
     def agi(self) -> Money:
         return self.gross_income - self.deductions
+
+    def magi(self) -> Money:
+        return self.agi() + self.magi_additions
