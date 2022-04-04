@@ -10,3 +10,7 @@ functionality in the future.
 ## Prerequisites
 You will need:
 - Python >= 3.8
+
+## License
+This library is released under the MIT License. See [LICENSE](./LICENSE) for
+details.
