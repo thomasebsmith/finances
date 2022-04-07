@@ -22,3 +22,6 @@ $ python3 -m src.finances.__main__
 ## License
 This library is released under the MIT License. See [LICENSE](./LICENSE) for
 details.
+
+## Copyright
+This project is copyright © 2022 Thomas Smith.
