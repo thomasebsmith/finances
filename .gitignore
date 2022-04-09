@@ -1,6 +1,36 @@
-.venv
+# Compiled or optimized Python files
 __pycache__
-*.egg-info
-*.swp
-.DS_Store
+*.py[cod]
+*$py.class
+
+# Distribution/packaging
 /build
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Linters
+.mypy_cache
+
+# Editor files
+*.swp
+
+# OS-specific metadata
+
+## Linux
+*~
+.directory
+.fuse_hidden*
+.nfs*
+
+## macOS
+.DS_Store
+._*
+
+## Windows
+[dD]esktop.ini
+ehthumbs.db
+ehthumbs_vista.db
+Thumbs.db
+Thumbs.db:encryptable
