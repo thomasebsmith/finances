@@ -1,3 +1,4 @@
+"""Finance-related utilities geared toward United States tax law."""
 from .metadata import VERSION as __version__
 
 from .earnings import Earnings, EarningsTaxPolicy, TaxCategory

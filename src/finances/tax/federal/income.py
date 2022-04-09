@@ -1,3 +1,5 @@
+"""Contains classes and utilities related to federal income tax."""
+
 from __future__ import annotations
 
 from ...earnings import Earnings, EarningsTaxPolicy, TaxCategory
@@ -55,7 +57,16 @@ BRACKETS_BY_YEAR: dict[int, dict[FilingStatus, list[Bracket]]] = {
 }
 
 class FederalIncomeTax:
+    """The United States federal income tax."""
+
     def __init__(self, year: int, filing_status: FilingStatus):
+        """
+        Creates a FederalIncomeTax.
+
+        Arguments:
+            year - The tax year.
+            filing_status - The tax filer's filing status.
+        """
         assert year in BRACKETS_BY_YEAR, f"No tax data for year {year}"
         assert filing_status in BRACKETS_BY_YEAR[year], (
             f"Invalid filing status {filing_status} for year {year}"
@@ -70,4 +81,11 @@ class FederalIncomeTax:
         )
 
     def calculate(self, earnings: Earnings) -> Money:
+        """
+        Calculates the amount of tax to be levied on earnings.
+
+        Arguments:
+            earnings - The earnings to tax.
+        Return value: The federal income tax to on earnings.
+        """
         return self._underlying.calculate(earnings)

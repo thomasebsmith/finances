@@ -1,3 +1,5 @@
+"""Tax-related finance utilities."""
+
 from .bracket import Bracket, BracketTax
 from .composite import CompositeTax
 from .federal import (
