@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from enum import auto, Enum
 
-from ..bracket import Bracket, BracketTax
-from ...earnings import Earnings, EarningsTaxPolicy
+from ...earnings import Earnings, EarningsTaxPolicy, TaxCategory
 from ...money import Money
+from ..bracket import Bracket, BracketTax
 
 class FilingStatus(Enum):
     SINGLE = auto()
@@ -71,7 +71,10 @@ class FederalIncomeTax:
 
         self._underlying = BracketTax(
             BRACKETS_BY_YEAR[year][filing_status],
-            policy=EarningsTaxPolicy(allow_deductions=True)
+            policy=EarningsTaxPolicy(
+                allow_deductions=True,
+                category=TaxCategory.FEDERAL
+            )
         )
 
     def calculate(self, earnings: Earnings) -> Money:

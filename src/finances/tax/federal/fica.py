@@ -1,7 +1,7 @@
-from ...earnings import Earnings, EarningsTaxPolicy
+from ...earnings import Earnings, EarningsTaxPolicy, TaxCategory
+from ...money import Money
 from ..composite import CompositeTax
 from ..flat import FlatTax
-from ...money import Money
 
 WAGE_BASE_LIMIT_BY_YEAR = {
     2021: Money.of(142800, 0)
@@ -16,6 +16,7 @@ class SocialSecurityTax:
             0.062,
             EarningsTaxPolicy(
                 allow_deductions=False,
+                category=TaxCategory.FEDERAL,
                 ceiling=WAGE_BASE_LIMIT_BY_YEAR[year]
             )
         )
@@ -28,7 +29,10 @@ class MedicareTax:
         assert year == 2021, f"no medicare tax data for {year}"
         self._underlying = FlatTax(
             0.0145,
-            EarningsTaxPolicy(allow_deductions=False)
+            EarningsTaxPolicy(
+                allow_deductions=False,
+                category=TaxCategory.FEDERAL
+            )
         )
 
     def calculate(self, earnings: Earnings) -> Money:

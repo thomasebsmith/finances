@@ -1,11 +1,20 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Optional
+from enum import auto, Enum
+from typing import Callable, Optional
 
 from .money import Money, ZERO
+
+class TaxCategory(Enum):
+    FEDERAL = auto()
+    STATE = auto()
+    LOCAL = auto()
 
 @dataclass(frozen=True)
 class EarningsTaxPolicy:
     allow_deductions: bool
+    category: tax.TaxCategory
     floor: Optional[Money] = None
     ceiling: Optional[Money] = None
 
@@ -16,15 +25,14 @@ class EarningsTaxPolicy:
 @dataclass(frozen=True)
 class Earnings:
     gross_income: Money
-    deductions: Money
-    magi_additions: Money
-
-    def __post_init__(self):
-        assert self.deductions >= ZERO, "deductions must be positive"
-        assert self.magi_additions >= ZERO, "MAGI additions must be positive"
+    deductions: dict[[tax.TaxCategory], Money]
+    magi_additions: dict[[tax.TaxCategory], Money]
 
     def taxable_income(self, policy: EarningsTaxPolicy) -> Money:
-        income = self.agi() if policy.allow_deductions else self.gross_income
+        income = (
+            self.agi(policy.category) if policy.allow_deductions
+            else self.gross_income
+        )
 
         if policy.floor is not None:
             income = max(policy.floor, income)
@@ -33,8 +41,12 @@ class Earnings:
 
         return income
 
-    def agi(self) -> Money:
-        return self.gross_income - self.deductions
+    def agi(self, category: tax.TaxCategory) -> Money:
+        assert category in self.deductions, f"no deductions for {category}"
+        return self.gross_income - self.deductions[category]
 
-    def magi(self) -> Money:
-        return self.agi() + self.magi_additions
+    def magi(self, category: tax.TaxCategory) -> Money:
+        assert category in self.magi_additions, (
+            f"no MAGI additions for {category}"
+        )
+        return self.agi(category) + self.magi_additions[category]
