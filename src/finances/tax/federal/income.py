@@ -1,17 +1,9 @@
 from __future__ import annotations
 
-from enum import auto, Enum
-
 from ...earnings import Earnings, EarningsTaxPolicy, TaxCategory
 from ...money import Money
 from ..bracket import Bracket, BracketTax
-
-class FilingStatus(Enum):
-    SINGLE = auto()
-    MARRIED_FILING_JOINTLY = auto()
-    MARRIED_FILING_SEPARATELY = auto()
-    HEAD_OF_HOUSEHOLD = auto()
-    SURVIVING_SPOUSE = auto()
+from .status import FilingStatus
 
 def _joint_brackets(
     brackets: list[Bracket]
