@@ -14,7 +14,7 @@ class TaxCategory(Enum):
 @dataclass(frozen=True)
 class EarningsTaxPolicy:
     allow_deductions: bool
-    category: tax.TaxCategory
+    category: TaxCategory
     floor: Optional[Money] = None
     ceiling: Optional[Money] = None
 
@@ -25,8 +25,8 @@ class EarningsTaxPolicy:
 @dataclass(frozen=True)
 class Earnings:
     gross_income: Money
-    deductions: dict[[tax.TaxCategory], Money]
-    magi_additions: dict[[tax.TaxCategory], Money]
+    deductions: dict[TaxCategory, Money]
+    magi_additions: dict[TaxCategory, Money]
 
     def taxable_income(self, policy: EarningsTaxPolicy) -> Money:
         income = (
@@ -41,11 +41,11 @@ class Earnings:
 
         return income
 
-    def agi(self, category: tax.TaxCategory) -> Money:
+    def agi(self, category: TaxCategory) -> Money:
         assert category in self.deductions, f"no deductions for {category}"
         return self.gross_income - self.deductions[category]
 
-    def magi(self, category: tax.TaxCategory) -> Money:
+    def magi(self, category: TaxCategory) -> Money:
         assert category in self.magi_additions, (
             f"no MAGI additions for {category}"
         )

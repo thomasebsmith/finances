@@ -3,6 +3,7 @@ from __future__ import annotations
 from ...earnings import Earnings, EarningsTaxPolicy, TaxCategory
 from ...money import Money
 from ..composite import CompositeTax
+from ..bracket import Bracket, BracketTax
 from ..flat import FlatTax
 from .status import FilingStatus
 

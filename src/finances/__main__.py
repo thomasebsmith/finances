@@ -8,7 +8,7 @@ from .tax import FederalIncomeTax, FICATax, FilingStatus
 
 def main():
     income_tax = FederalIncomeTax(2021, FilingStatus.SINGLE)
-    fica = FICATax(2021)
+    fica = FICATax(2021, FilingStatus.SINGLE)
     income = Earnings(
         gross_income=Money.of(100000),
         deductions={TaxCategory.FEDERAL: Money.of(12550)},
