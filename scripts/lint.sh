@@ -2,6 +2,8 @@
 
 SRC_DIR=src
 
-source .venv/bin/activate
-pip install -q -r requirements-lint.txt
-mypy "$SRC_DIR"
+source ./scripts/venv.sh
+pip install -q -r requirements-lint.txt || exit 1
+
+echo 'Running mypy...'
+mypy "$SRC_DIR" || exit 1
