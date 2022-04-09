@@ -2,7 +2,7 @@
 
 SRC_DIR=src
 
-source ./scripts/venv.sh
+. ./scripts/venv.sh
 pip install -q -r requirements-lint.txt || exit 1
 
 echo 'Running mypy...'
