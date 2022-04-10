@@ -6,6 +6,7 @@ from ..earnings import Earnings
 from ..money import Money, ZERO
 from .tax import IncomeTax
 
+
 class CompositeTax:
     """An income tax that is calculated as the sum of 0 or more other taxes."""
 

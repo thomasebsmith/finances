@@ -8,6 +8,7 @@ from .earnings import Earnings, TaxCategory
 from .money import Money, ZERO
 from .tax import FederalIncomeTax, FICATax, FilingStatus
 
+
 def main():
     """Prints the amount of federal taxes on $100,000 in 2021."""
     income_tax = FederalIncomeTax(2021, FilingStatus.SINGLE)
@@ -19,6 +20,7 @@ def main():
     )
     print(income_tax.calculate(income) + fica.calculate(income))
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())

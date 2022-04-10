@@ -6,9 +6,11 @@ from dataclasses import dataclass
 
 CENTS_PER_DOLLAR = 100
 
+
 @dataclass(frozen=True, order=True)
 class Money:
     """Represents an amount of U.S. dollars, positive, negative, or zero."""
+
     _cents: int
 
     @staticmethod
@@ -24,9 +26,9 @@ class Money:
                    be from 0-99 inclusive.
         Return value: The specified Money.
         """
-        assert 0 <= cents < CENTS_PER_DOLLAR, (
-            f"cents must be between 0 and {CENTS_PER_DOLLAR}"
-        )
+        assert (
+            0 <= cents < CENTS_PER_DOLLAR
+        ), f"cents must be between 0 and {CENTS_PER_DOLLAR}"
 
         if dollars < 0:
             # E.g. -4, 53 becomes -453
@@ -83,5 +85,6 @@ class Money:
         Return value: A new Money representing this Money times ratio.
         """
         return Money(round(self._cents * ratio))
+
 
 ZERO = Money.of(0, 0)

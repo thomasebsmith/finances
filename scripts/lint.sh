@@ -10,3 +10,6 @@ mypy "$SRC_DIR" || exit 1
 
 echo 'Running pylint...'
 pylint "$SRC_DIR" || exit 1
+
+echo 'Running black...'
+black --check "$SRC_DIR" || exit 1

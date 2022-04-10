@@ -3,6 +3,7 @@
 from ..earnings import Earnings, EarningsTaxPolicy
 from ..money import Money
 
+
 class FlatTax:
     """A fixed-percentage tax on income."""
 
@@ -25,6 +26,4 @@ class FlatTax:
             earnings - The earnings to tax.
         Return value: (earnings's taxable income) * (the flat tax rate).
         """
-        return (earnings
-                .taxable_income(self.policy)
-                .grow_and_round(self.rate))
+        return earnings.taxable_income(self.policy).grow_and_round(self.rate)

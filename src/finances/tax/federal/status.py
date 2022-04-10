@@ -2,8 +2,10 @@
 
 from enum import auto, Enum
 
+
 class FilingStatus(Enum):
     """A federal filing status."""
+
     SINGLE = auto()
     MARRIED_FILING_JOINTLY = auto()
     MARRIED_FILING_SEPARATELY = auto()

@@ -9,9 +9,8 @@ from ..bracket import Bracket, BracketTax
 from ..flat import FlatTax
 from .status import FilingStatus
 
-WAGE_BASE_LIMIT_BY_YEAR = {
-    2021: Money.of(142800, 0)
-}
+WAGE_BASE_LIMIT_BY_YEAR = {2021: Money.of(142800, 0)}
+
 
 class SocialSecurityTax:
     """The United States federal social security tax."""
@@ -23,16 +22,16 @@ class SocialSecurityTax:
         Arguments:
             year - The tax year.
         """
-        assert year in WAGE_BASE_LIMIT_BY_YEAR, (
-            f"no social security tax data for {year}"
-        )
+        assert (
+            year in WAGE_BASE_LIMIT_BY_YEAR
+        ), f"no social security tax data for {year}"
         self._underlying = FlatTax(
             0.062,
             EarningsTaxPolicy(
                 allow_deductions=False,
                 category=TaxCategory.FEDERAL,
-                ceiling=WAGE_BASE_LIMIT_BY_YEAR[year]
-            )
+                ceiling=WAGE_BASE_LIMIT_BY_YEAR[year],
+            ),
         )
 
     def calculate(self, earnings: Earnings) -> Money:
@@ -45,15 +44,20 @@ class SocialSecurityTax:
         """
         return self._underlying.calculate(earnings)
 
+
 AMT_THRESHOLDS: dict[FilingStatus, Money] = {
     FilingStatus.MARRIED_FILING_JOINTLY: Money.of(250000),
     FilingStatus.MARRIED_FILING_SEPARATELY: Money.of(125000),
-    **dict.fromkeys([
-        FilingStatus.SINGLE,
-        FilingStatus.HEAD_OF_HOUSEHOLD,
-        FilingStatus.SURVIVING_SPOUSE
-    ], Money.of(200000))
+    **dict.fromkeys(
+        [
+            FilingStatus.SINGLE,
+            FilingStatus.HEAD_OF_HOUSEHOLD,
+            FilingStatus.SURVIVING_SPOUSE,
+        ],
+        Money.of(200000),
+    ),
 }
+
 
 class MedicareTax:
     """
@@ -77,9 +81,8 @@ class MedicareTax:
                 Bracket(0.0145, Money.of(0)),
             ],
             policy=EarningsTaxPolicy(
-                allow_deductions=False,
-                category=TaxCategory.FEDERAL
-            )
+                allow_deductions=False, category=TaxCategory.FEDERAL
+            ),
         )
 
     def calculate(self, earnings: Earnings) -> Money:
@@ -92,6 +95,7 @@ class MedicareTax:
         """
         return self._underlying.calculate(earnings)
 
+
 class FICATax:
     """United States FICA taxes (social security and medicare combined)."""
 
@@ -103,10 +107,12 @@ class FICATax:
             year - The tax year.
             filing_status - The filing status of the tax payer.
         """
-        self._underlying = CompositeTax([
-            SocialSecurityTax(year),
-            MedicareTax(year, filing_status),
-        ])
+        self._underlying = CompositeTax(
+            [
+                SocialSecurityTax(year),
+                MedicareTax(year, filing_status),
+            ]
+        )
 
     def calculate(self, earnings: Earnings) -> Money:
         """

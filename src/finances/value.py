@@ -6,9 +6,11 @@ from dataclasses import dataclass
 
 from .money import Money
 
+
 @dataclass(frozen=True, order=True)
 class Value:
     """Represents a financial value, independent of time."""
+
     _year_2000_usd_cents: int
 
     @staticmethod
@@ -51,5 +53,6 @@ class Value:
     def __mul__(self, other: int) -> Value:
         """Creates a new Value with the product of this Value and other."""
         return Value(self._year_2000_usd_cents * other)
+
 
 ZERO = Value(0)

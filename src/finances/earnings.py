@@ -8,15 +8,19 @@ from typing import Optional
 
 from .money import Money
 
+
 class TaxCategory(Enum):
     """A classification of a tax and the level at which it is applied."""
+
     FEDERAL = auto()
     STATE = auto()
     LOCAL = auto()
 
+
 @dataclass(frozen=True)
 class EarningsTaxPolicy:
     """A specification of to which earnings a tax applies."""
+
     allow_deductions: bool
     category: TaxCategory
     floor: Optional[Money] = None
@@ -26,9 +30,11 @@ class EarningsTaxPolicy:
         if self.floor is not None and self.ceiling is not None:
             assert self.floor <= self.ceiling, "floor must not exceed ceiling"
 
+
 @dataclass(frozen=True)
 class Earnings:
     """Information about an individual's taxable earnings for the year."""
+
     gross_income: Money
     deductions: dict[TaxCategory, Money]
     magi_additions: dict[TaxCategory, Money]
@@ -42,7 +48,8 @@ class Earnings:
         Return value: The amount of taxable income
         """
         income = (
-            self.agi(policy.category) if policy.allow_deductions
+            self.agi(policy.category)
+            if policy.allow_deductions
             else self.gross_income
         )
 
@@ -72,7 +79,7 @@ class Earnings:
             category - The category to use to determine deductions, etc.
         Return value: The MAGI
         """
-        assert category in self.magi_additions, (
-            f"no MAGI additions for {category}"
-        )
+        assert (
+            category in self.magi_additions
+        ), f"no MAGI additions for {category}"
         return self.agi(category) + self.magi_additions[category]
