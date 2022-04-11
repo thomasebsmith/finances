@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from ...earnings import Earnings, EarningsTaxPolicy, TaxCategory
+from ...earnings import EarningsTaxPolicy, TaxCategory
 from ...money import Money
 from ..bracket import Bracket, BracketTax
 from .status import FilingStatus
@@ -61,7 +61,7 @@ BRACKETS_BY_YEAR: dict[int, dict[FilingStatus, list[Bracket]]] = {
 }
 
 
-class FederalIncomeTax:
+class FederalIncomeTax(BracketTax):
     """The United States federal income tax."""
 
     def __init__(self, year: int, filing_status: FilingStatus):
@@ -77,19 +77,9 @@ class FederalIncomeTax:
             filing_status in BRACKETS_BY_YEAR[year]
         ), f"Invalid filing status {filing_status} for year {year}"
 
-        self._underlying = BracketTax(
+        super().__init__(
             BRACKETS_BY_YEAR[year][filing_status],
             policy=EarningsTaxPolicy(
                 allow_deductions=True, category=TaxCategory.FEDERAL
             ),
         )
-
-    def calculate(self, earnings: Earnings) -> Money:
-        """
-        Calculates the amount of tax to be levied on earnings.
-
-        Arguments:
-            earnings - The earnings to tax.
-        Return value: The federal income tax on earnings.
-        """
-        return self._underlying.calculate(earnings)

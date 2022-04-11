@@ -87,4 +87,4 @@ class Money:
         return Money(round(self._cents * ratio))
 
 
-ZERO = Money.of(0, 0)
+ZERO = Money.of(0)

@@ -2,17 +2,17 @@
 
 from __future__ import annotations
 
-from ...earnings import Earnings, EarningsTaxPolicy, TaxCategory
+from ...earnings import EarningsTaxPolicy, TaxCategory
 from ...money import Money
 from ..composite import CompositeTax
 from ..bracket import Bracket, BracketTax
 from ..flat import FlatTax
 from .status import FilingStatus
 
-WAGE_BASE_LIMIT_BY_YEAR = {2021: Money.of(142800, 0)}
+WAGE_BASE_LIMIT_BY_YEAR = {2021: Money.of(142800)}
 
 
-class SocialSecurityTax:
+class SocialSecurityTax(FlatTax):
     """The United States federal social security tax."""
 
     def __init__(self, year: int):
@@ -25,7 +25,7 @@ class SocialSecurityTax:
         assert (
             year in WAGE_BASE_LIMIT_BY_YEAR
         ), f"no social security tax data for {year}"
-        self._underlying = FlatTax(
+        super().__init__(
             0.062,
             EarningsTaxPolicy(
                 allow_deductions=False,
@@ -33,16 +33,6 @@ class SocialSecurityTax:
                 ceiling=WAGE_BASE_LIMIT_BY_YEAR[year],
             ),
         )
-
-    def calculate(self, earnings: Earnings) -> Money:
-        """
-        Calculates the amount of tax to be levied on earnings.
-
-        Arguments:
-            earnings - The earnings to tax.
-        Return value: The amount of social security tax due.
-        """
-        return self._underlying.calculate(earnings)
 
 
 AMT_THRESHOLDS: dict[FilingStatus, Money] = {
@@ -59,7 +49,7 @@ AMT_THRESHOLDS: dict[FilingStatus, Money] = {
 }
 
 
-class MedicareTax:
+class MedicareTax(BracketTax):
     """
     The United States federal medicare tax.
 
@@ -75,7 +65,7 @@ class MedicareTax:
             filing_status - The filing status of the taxpayer.
         """
         assert year == 2021, f"no medicare tax data for {year}"
-        self._underlying = BracketTax(
+        super().__init__(
             [
                 Bracket(0.0145 + 0.009, AMT_THRESHOLDS[filing_status]),
                 Bracket(0.0145, Money.of(0)),
@@ -85,18 +75,8 @@ class MedicareTax:
             ),
         )
 
-    def calculate(self, earnings: Earnings) -> Money:
-        """
-        Calculates the amount of tax to be levied on earnings.
 
-        Arguments:
-            earnings - The earnings to tax.
-        Return value: The amount of medicare tax due.
-        """
-        return self._underlying.calculate(earnings)
-
-
-class FICATax:
+class FICATax(CompositeTax):
     """United States FICA taxes (social security and medicare combined)."""
 
     def __init__(self, year: int, filing_status: FilingStatus):
@@ -107,19 +87,9 @@ class FICATax:
             year - The tax year.
             filing_status - The filing status of the tax payer.
         """
-        self._underlying = CompositeTax(
+        super().__init__(
             [
                 SocialSecurityTax(year),
                 MedicareTax(year, filing_status),
             ]
         )
-
-    def calculate(self, earnings: Earnings) -> Money:
-        """
-        Calculates the amount of tax to be levied on earnings.
-
-        Arguments:
-            earnings - The earnings to tax.
-        Return value: The amount of FICA taxes due.
-        """
-        return self._underlying.calculate(earnings)
