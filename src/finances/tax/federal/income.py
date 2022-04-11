@@ -90,6 +90,6 @@ class FederalIncomeTax:
 
         Arguments:
             earnings - The earnings to tax.
-        Return value: The federal income tax to on earnings.
+        Return value: The federal income tax on earnings.
         """
         return self._underlying.calculate(earnings)
