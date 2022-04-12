@@ -9,7 +9,10 @@ from ..bracket import Bracket, BracketTax
 from ..flat import FlatTax
 from .status import FilingStatus
 
-WAGE_BASE_LIMIT_BY_YEAR = {2021: Money.of(142800)}
+WAGE_BASE_LIMIT_BY_YEAR: dict[int, Money] = {
+    2021: Money.of(142800),
+    2022: Money.of(147000),
+}
 
 
 class SocialSecurityTax(FlatTax):
@@ -48,6 +51,8 @@ AMT_THRESHOLDS: dict[FilingStatus, Money] = {
     ),
 }
 
+MEDICARE_TAX_DATA_YEARS = {2021, 2022}
+
 
 class MedicareTax(BracketTax):
     """
@@ -64,7 +69,9 @@ class MedicareTax(BracketTax):
             year - The tax year.
             filing_status - The filing status of the taxpayer.
         """
-        assert year == 2021, f"no medicare tax data for {year}"
+        assert (
+            year in MEDICARE_TAX_DATA_YEARS
+        ), f"no medicare tax data for {year}"
         super().__init__(
             [
                 Bracket(0.0145 + 0.009, AMT_THRESHOLDS[filing_status]),

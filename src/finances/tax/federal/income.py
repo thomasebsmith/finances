@@ -57,7 +57,47 @@ BRACKETS_BY_YEAR: dict[int, dict[FilingStatus, list[Bracket]]] = {
             Bracket(0.12, Money.of(9950)),
             Bracket(0.10, Money.of(0)),
         ],
-    }
+    },
+    2022: {
+        **_joint_brackets(
+            [
+                Bracket(0.37, Money.of(647850)),
+                Bracket(0.35, Money.of(431900)),
+                Bracket(0.32, Money.of(340100)),
+                Bracket(0.24, Money.of(178150)),
+                Bracket(0.22, Money.of(83550)),
+                Bracket(0.12, Money.of(20550)),
+                Bracket(0.10, Money.of(0)),
+            ]
+        ),
+        FilingStatus.HEAD_OF_HOUSEHOLD: [
+            Bracket(0.37, Money.of(539900)),
+            Bracket(0.35, Money.of(215950)),
+            Bracket(0.32, Money.of(170050)),
+            Bracket(0.24, Money.of(89050)),
+            Bracket(0.22, Money.of(55900)),
+            Bracket(0.12, Money.of(14650)),
+            Bracket(0.10, Money.of(0)),
+        ],
+        FilingStatus.SINGLE: [
+            Bracket(0.37, Money.of(539900)),
+            Bracket(0.35, Money.of(215950)),
+            Bracket(0.32, Money.of(170050)),
+            Bracket(0.24, Money.of(89075)),
+            Bracket(0.22, Money.of(41775)),
+            Bracket(0.12, Money.of(10275)),
+            Bracket(0.10, Money.of(0)),
+        ],
+        FilingStatus.MARRIED_FILING_SEPARATELY: [
+            Bracket(0.37, Money.of(323925)),
+            Bracket(0.35, Money.of(215950)),
+            Bracket(0.32, Money.of(170050)),
+            Bracket(0.24, Money.of(89075)),
+            Bracket(0.22, Money.of(41775)),
+            Bracket(0.12, Money.of(10275)),
+            Bracket(0.10, Money.of(0)),
+        ],
+    },
 }
 
 
