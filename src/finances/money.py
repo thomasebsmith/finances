@@ -3,8 +3,27 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Optional
 
 CENTS_PER_DOLLAR = 100
+
+
+_DIGITS = frozenset(map(str, range(0, 10)))
+
+
+def _parse_nonnegative_int(
+    int_string: str, expected_length: Optional[int] = None
+) -> int:
+    if expected_length is not None and len(int_string) is not expected_length:
+        raise ValueError(
+            f"Expected {expected_length} characters, but got {len(int_string)}"
+        )
+
+    for char in int_string:
+        if char not in _DIGITS:
+            raise ValueError(f"Unexpected character {char}")
+
+    return int(int_string)
 
 
 @dataclass(frozen=True, order=True)
@@ -26,15 +45,53 @@ class Money:
                    be from 0-99 inclusive.
         Return value: The specified Money.
         """
-        assert (
-            0 <= cents < CENTS_PER_DOLLAR
-        ), f"cents must be between 0 and {CENTS_PER_DOLLAR}"
+        if not 0 <= cents < CENTS_PER_DOLLAR:
+            raise ValueError(f"cents must be between 0 and {CENTS_PER_DOLLAR}")
 
         if dollars < 0:
             # E.g. -4, 53 becomes -453
             return Money(dollars * CENTS_PER_DOLLAR - cents)
         else:
             return Money(dollars * CENTS_PER_DOLLAR + cents)
+
+    @staticmethod
+    def parse(money_string: str) -> Money:
+        """
+        Parses a string in the form $X.XX to create a Money object.
+
+        Arguments:
+            money_string - The string to parse.
+        Return value: A Money object representing the parsed value.
+        """
+        # Remove whitespace
+        money_string = money_string.strip()
+
+        # Remove - if it exists
+        negate = money_string.startswith("-")
+        if negate:
+            money_string = money_string[1:]
+
+        # Remove $
+        if not money_string.startswith("$"):
+            raise ValueError("Money must start with $")
+        money_string = money_string[1:]
+
+        # Separate by .
+        components = money_string.split(".")
+
+        if len(components) == 1:
+            dollars = _parse_nonnegative_int(components[0])
+            cents = 0
+        elif len(components) == 2:
+            dollars = _parse_nonnegative_int(components[0])
+            cents = _parse_nonnegative_int(components[1], 2)
+        else:
+            raise ValueError("Too many dots in money")
+
+        if negate:
+            dollars = -dollars
+
+        return Money.of(dollars, cents)
 
     def truncated_dollars(self) -> int:
         """
