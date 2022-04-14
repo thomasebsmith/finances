@@ -11,20 +11,23 @@ from .tax.state.mi import MichiganIncomeTax
 
 
 def print_taxes(
-    year: int, standard_deduction: Money, personal_exemption: Money
+    gross_income: Money,
+    year: int,
+    standard_deduction: Money,
+    personal_exemption: Money,
 ):
     """
-    Prints the taxes required for $100,000 of a single person's income.
+    Prints the taxes required for a single person's income.
 
     Assumes that no extra deductions or exemptions are available, and that the
     person lives in Michigan.
 
     Arguments:
+        gross_income - The person's gross income for the year.
         year - The tax year.
         standard_deduction - The U.S. federal standard deduction for the year.
         personal_exemption - The Michigan personal exemption for the year.
     """
-    gross_income = Money.of(100000)
     fed_income_tax = FederalIncomeTax(year, FilingStatus.SINGLE)
     mi_income_tax = MichiganIncomeTax(year)
     fica = FICATax(year, FilingStatus.SINGLE)
@@ -52,8 +55,9 @@ def print_taxes(
 
 def main():
     """Prints the amount of federal taxes on $100,000 in 2021 and 2022."""
-    print_taxes(2021, Money.of(12550), Money.of(4900))
-    print_taxes(2022, Money.of(12950), Money.of(5000))
+    gross_income = Money.parse(input("Gross income: "))
+    print_taxes(gross_income, 2021, Money.of(12550), Money.of(4900))
+    print_taxes(gross_income, 2022, Money.of(12950), Money.of(5000))
     return 0
 
 
