@@ -1,18 +1,19 @@
 """Contains classes and utilities related to FICA taxes."""
 
-from __future__ import annotations
-
 from ...earnings import EarningsTaxPolicy, TaxCategory
 from ...money import Money
 from ..composite import CompositeTax
 from ..bracket import Bracket, BracketTax
 from ..flat import FlatTax
+from .data import (
+    ADDITIONAL_MEDICARE_TAX_RATE,
+    ADDITIONAL_MEDICARE_TAX_THRESHOLDS,
+    MEDICARE_TAX_DATA_YEARS,
+    MEDICARE_TAX_RATE,
+    SOCIAL_SECURITY_TAX_RATE,
+    WAGE_BASE_LIMIT_BY_YEAR,
+)
 from .status import FilingStatus
-
-WAGE_BASE_LIMIT_BY_YEAR: dict[int, Money] = {
-    2021: Money.of(142800),
-    2022: Money.of(147000),
-}
 
 
 class SocialSecurityTax(FlatTax):
@@ -29,29 +30,13 @@ class SocialSecurityTax(FlatTax):
             year in WAGE_BASE_LIMIT_BY_YEAR
         ), f"no social security tax data for {year}"
         super().__init__(
-            0.062,
+            SOCIAL_SECURITY_TAX_RATE,
             EarningsTaxPolicy(
                 allow_deductions=False,
                 category=TaxCategory.FEDERAL,
                 ceiling=WAGE_BASE_LIMIT_BY_YEAR[year],
             ),
         )
-
-
-AMT_THRESHOLDS: dict[FilingStatus, Money] = {
-    FilingStatus.MARRIED_FILING_JOINTLY: Money.of(250000),
-    FilingStatus.MARRIED_FILING_SEPARATELY: Money.of(125000),
-    **dict.fromkeys(
-        [
-            FilingStatus.SINGLE,
-            FilingStatus.HEAD_OF_HOUSEHOLD,
-            FilingStatus.SURVIVING_SPOUSE,
-        ],
-        Money.of(200000),
-    ),
-}
-
-MEDICARE_TAX_DATA_YEARS = {2021, 2022}
 
 
 class MedicareTax(BracketTax):
@@ -74,8 +59,11 @@ class MedicareTax(BracketTax):
         ), f"no medicare tax data for {year}"
         super().__init__(
             [
-                Bracket(0.0145 + 0.009, AMT_THRESHOLDS[filing_status]),
-                Bracket(0.0145, Money.of(0)),
+                Bracket(
+                    MEDICARE_TAX_RATE + ADDITIONAL_MEDICARE_TAX_RATE,
+                    ADDITIONAL_MEDICARE_TAX_THRESHOLDS[filing_status],
+                ),
+                Bracket(MEDICARE_TAX_RATE, Money.of(0)),
             ],
             policy=EarningsTaxPolicy(
                 allow_deductions=False, category=TaxCategory.FEDERAL
