@@ -10,5 +10,6 @@ from .federal import (
     SocialSecurityTax,
 )
 from .flat import FlatTax
+from .maximum import MaximumTax
 from .tax import IncomeTax
 from . import state

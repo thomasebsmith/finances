@@ -1,22 +1,23 @@
-"""Classes and utilities related to adding taxes."""
+"""Classes and utilities related to taking the maximu of one or more taxes."""
 
 from __future__ import annotations
 
 from ..earnings import Earnings
-from ..money import Money, ZERO
+from ..money import Money
 from .tax import IncomeTax
 
 
-class CompositeTax:
-    """An income tax that is calculated as the sum of 0 or more other taxes."""
+class MaximumTax:
+    """An income tax that is calculated as the highest of 1 or more taxes."""
 
     def __init__(self, taxes: list[IncomeTax]):
         """
-        Creates a CompositeTax.
+        Creates a MaximumTax.
 
         Arguments:
             taxes - The taxes to sum in order to levy this tax.
         """
+        assert len(taxes) > 0, "MaximumTax must be created with at least 1 tax"
         self.taxes = taxes
 
     def calculate(self, earnings: Earnings) -> Money:
@@ -25,6 +26,6 @@ class CompositeTax:
 
         Arguments:
             earnings - The earnings to tax.
-        Return value: The sum of all of self.taxes levied on earnings.
+        Return value: The maximum of all of self.taxes levied on earnings.
         """
-        return sum((tax.calculate(earnings) for tax in self.taxes), start=ZERO)
+        return max((tax.calculate(earnings) for tax in self.taxes))
