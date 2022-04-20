@@ -1,4 +1,4 @@
-import pytest
+"""Tests of src/finances/earnings.py."""
 
 from finances import Earnings, Money, TaxCategory
 
@@ -19,6 +19,7 @@ EARNINGS_1 = Earnings(
 
 
 def test_agi():
+    """Tests the behavior of Earnings.agi."""
     assert EARNINGS_1.agi(TaxCategory.FEDERAL) == Money.of(91000)
     assert EARNINGS_1.agi(TaxCategory.STATE) == Money.of(92000)
     assert EARNINGS_1.agi(TaxCategory.LOCAL) == Money.of(93000)

@@ -13,6 +13,9 @@ __pycache__
 # Linters
 .mypy_cache
 
+# Testing
+.pytest_cache
+
 # Editor files
 *.swp
 
