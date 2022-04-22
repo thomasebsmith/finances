@@ -1,8 +1,10 @@
 #!/bin/sh
 
-SRC_DIR=src
+DIRS='src test'
 
 . ./scripts/venv.sh
 pip install -q -r requirements-lint.txt || exit 1
 
-black "$SRC_DIR"
+for dir in $DIRS; do
+  black "$dir"
+done
