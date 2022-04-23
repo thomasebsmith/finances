@@ -1,6 +1,6 @@
 """Tests of src/finances/earnings.py."""
 
-from finances import Earnings, Money, TaxCategory
+from finances import Earnings, EarningsTaxPolicy, Money, TaxCategory
 
 
 EARNINGS_1 = Earnings(
