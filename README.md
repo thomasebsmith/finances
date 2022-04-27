@@ -19,6 +19,13 @@ $ cd finances
 $ python3 -m src.finances.__main__
 ```
 
+To run this library's unit tests:
+```sh
+$ git clone https://github.com/thomasebsmith/finances.git
+$ cd finances
+$ ./scripts/test.sh
+```
+
 ## License
 This library is released under the MIT License. See [LICENSE](./LICENSE) for
 details.
