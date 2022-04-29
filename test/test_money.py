@@ -21,3 +21,14 @@ def test_parse():
     assert Money.parse("$0") == ZERO
     assert Money.parse("-$0") == ZERO
     assert Money.parse("-$923.60") == Money.of(-923, 60)
+
+
+def test_truncated_dollars():
+    """Tests the behavior of Money.truncated_dollars."""
+    assert ZERO.truncated_dollars() == 0
+    assert Money.of(0, 99).truncated_dollars() == 0
+    assert Money.of(101, 1).truncated_dollars() == 101
+    assert Money.of(57).truncated_dollars() == 57
+    assert Money(-99).truncated_dollars() == 0
+    assert Money.of(-1, 1).truncated_dollars() == -1
+    assert Money.of(-85, 50).truncated_dollars() == -85
