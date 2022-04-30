@@ -12,6 +12,9 @@ You will need:
 - Python >= 3.8
 
 ## Quick Start
+It is recommended to install and run this library in a virtual environment;
+however, doing so is not required.
+
 To run an example program that uses this library:
 ```sh
 $ git clone https://github.com/thomasebsmith/finances.git
