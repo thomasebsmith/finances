@@ -3,12 +3,19 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Optional
+from typing import cast, Optional
 
 CENTS_PER_DOLLAR = 100
 
 
 _DIGITS = frozenset(map(str, range(0, 10)))
+
+
+class _NegativeZeroMarker:
+    pass
+
+
+NEGATIVE_ZERO = _NegativeZeroMarker()
 
 
 def _parse_nonnegative_int(
@@ -33,7 +40,7 @@ class Money:
     _cents: int
 
     @staticmethod
-    def of(dollars: int, cents: int = 0) -> Money:
+    def of(dollars: int | _NegativeZeroMarker, cents: int = 0) -> Money:
         """
         Creates Money with the given number of dollars and cents.
 
@@ -48,11 +55,14 @@ class Money:
         if not 0 <= cents < CENTS_PER_DOLLAR:
             raise ValueError(f"cents must be between 0 and {CENTS_PER_DOLLAR}")
 
-        if dollars < 0:
+        is_negative_zero = isinstance(dollars, _NegativeZeroMarker)
+        num_dollars = 0 if is_negative_zero else cast(int, dollars)
+
+        if is_negative_zero or num_dollars < 0:
             # E.g. -4, 53 becomes -453
-            return Money(dollars * CENTS_PER_DOLLAR - cents)
+            return Money(num_dollars * CENTS_PER_DOLLAR - cents)
         else:
-            return Money(dollars * CENTS_PER_DOLLAR + cents)
+            return Money(num_dollars * CENTS_PER_DOLLAR + cents)
 
     @staticmethod
     def parse(money_string: str) -> Money:

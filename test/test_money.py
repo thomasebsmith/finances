@@ -1,7 +1,7 @@
 """Tests of src/finances/money.py."""
 
 from finances import Money
-from finances.money import ZERO
+from finances.money import ZERO, NEGATIVE_ZERO
 
 
 def test_of():
@@ -12,6 +12,7 @@ def test_of():
     assert Money.of(0, 0) == ZERO
     assert Money.of(8765, 30) == Money(876530)
     assert Money.of(-314, 15) == Money(-31415)
+    assert Money.of(NEGATIVE_ZERO, 46) == Money(-46)
 
 
 def test_parse():
