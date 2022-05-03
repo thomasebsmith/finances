@@ -33,3 +33,14 @@ def test_truncated_dollars():
     assert Money(-99).truncated_dollars() == 0
     assert Money.of(-1, 1).truncated_dollars() == -1
     assert Money.of(-85, 50).truncated_dollars() == -85
+
+
+def test_extra_cents():
+    """Tests the behavior of Money.extra_cents."""
+    assert ZERO.extra_cents() == 0
+    assert Money.of(0, 99).extra_cents() == 99
+    assert Money.of(101, 1).extra_cents() == 1
+    assert Money.of(57).extra_cents() == 0
+    assert Money(-99).extra_cents() == 99
+    assert Money.of(-1, 1).extra_cents() == 1
+    assert Money.of(-85, 50).extra_cents() == 50

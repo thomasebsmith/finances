@@ -119,7 +119,10 @@ class Money:
 
         Return value: The number of extra cents, from 0-99 inclusive.
         """
-        return abs(self._cents % CENTS_PER_DOLLAR)
+        if self._cents >= 0:
+            return self._cents % CENTS_PER_DOLLAR
+        else:
+            return abs(self._cents % CENTS_PER_DOLLAR - CENTS_PER_DOLLAR)
 
     def all_cents(self) -> int:
         """Returns the total number of cents this Money has."""
