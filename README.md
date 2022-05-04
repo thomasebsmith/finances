@@ -22,7 +22,8 @@ $ cd finances
 $ python3 -m src.finances.__main__
 ```
 
-To run this library's unit tests:
+To run this library's unit tests (this will automatically create a virtual
+environment):
 ```sh
 $ git clone https://github.com/thomasebsmith/finances.git
 $ cd finances
