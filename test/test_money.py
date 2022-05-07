@@ -44,3 +44,14 @@ def test_extra_cents():
     assert Money(-99).extra_cents() == 99
     assert Money.of(-1, 1).extra_cents() == 1
     assert Money.of(-85, 50).extra_cents() == 50
+
+
+def test_all_cents():
+    """Tests the behavior of Money.all_cents."""
+    assert ZERO.all_cents() == 0
+    assert Money.of(0, 51).all_cents() == 51
+    assert Money.of(314, 5).all_cents() == 31405
+    assert Money.of(-82).all_cents() == -8200
+    assert Money.of(-1, 35).all_cents() == -135
+    assert Money.of(NEGATIVE_ZERO, 68).all_cents() == -68
+    assert Money.of(-62, 8).all_cents() == -6208
