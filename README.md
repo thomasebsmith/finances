@@ -1,6 +1,6 @@
 # Finances
-**Warning: The utilities in this project may be out of date or inaccurate.
-They do not attempt to provide financial advice. Use them at your own risk!**
+**Warning: This project may be out of date or inaccurate. It does not attempt
+to provide financial advice. Use it at your own risk!**
 
 This project provides a Python library that you can use for analyzing and
 simulating finances. It is designed for dealing with United States financial
