@@ -55,3 +55,13 @@ def test_all_cents():
     assert Money.of(-1, 35).all_cents() == -135
     assert Money.of(NEGATIVE_ZERO, 68).all_cents() == -68
     assert Money.of(-62, 8).all_cents() == -6208
+
+
+def test_str():
+    """Tests the behavior of Money.__str__."""
+    assert str(ZERO) == "$0.00"
+    assert str(Money.of(0, 1)) == "$0.01"
+    assert str(Money.of(3, 14)) == "$3.14"
+    assert str(Money.of(27, 18)) == "$27.18"
+    assert str(Money.of(NEGATIVE_ZERO, 35)) == "-$0.35"
+    assert str(Money.of(-82, 6)) == "-$82.06"

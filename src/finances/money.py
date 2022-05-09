@@ -130,7 +130,10 @@ class Money:
 
     def __str__(self) -> str:
         """Creates a string representation of this Money using $XX.XX syntax."""
-        return f"${self.truncated_dollars()}.{self.extra_cents():02}"
+        if self._cents >= 0:
+            return f"${self.truncated_dollars()}.{self.extra_cents():02}"
+        else:
+            return f"-${-self.truncated_dollars()}.{self.extra_cents():02}"
 
     def __add__(self, other: Money) -> Money:
         """Creates a new Money with the sum of this Money and other."""
