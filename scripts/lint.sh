@@ -1,8 +1,5 @@
 #!/bin/sh
 
-SRC_DIR=src
-TEST_DIR=test
-
 DIRS='src test'
 
 . ./scripts/venv.sh
