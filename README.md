@@ -31,6 +31,11 @@ $ cd finances
 $ ./scripts/test.sh
 ```
 
+## Roadmap
+### v0.1 - In Progress
+- General financial utility classes
+- Basic tax computations
+
 ## License
 This library is released under the MIT License. See [LICENSE](./LICENSE) for
 details.
