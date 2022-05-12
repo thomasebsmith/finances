@@ -13,7 +13,7 @@ from .tax.state.mi import MichiganIncomeTax
 def print_taxes(
     gross_income: Money,
     year: int,
-    standard_deduction: Money,
+    deductions: Money,
     personal_exemption: Money,
 ):
     """
@@ -25,7 +25,7 @@ def print_taxes(
     Arguments:
         gross_income - The person's gross income for the year.
         year - The tax year.
-        standard_deduction - The U.S. federal standard deduction for the year.
+        deductions - The deductions for the year.
         personal_exemption - The Michigan personal exemption for the year.
     """
     fed_income_tax = FederalIncomeTax(year, FilingStatus.SINGLE)
@@ -34,7 +34,7 @@ def print_taxes(
     income = Earnings(
         gross_income=gross_income,
         deductions={
-            TaxCategory.FEDERAL: standard_deduction,
+            TaxCategory.FEDERAL: deductions,
             TaxCategory.STATE: personal_exemption,
         },
         magi_additions={
@@ -56,8 +56,9 @@ def print_taxes(
 def main():
     """Prints the amount of federal taxes on $100,000 in 2021 and 2022."""
     gross_income = Money.parse(input("Gross income: "))
-    print_taxes(gross_income, 2021, Money.of(12550), Money.of(4900))
-    print_taxes(gross_income, 2022, Money.of(12950), Money.of(5000))
+    deductions = Money.parse(input("Itemized deductions: "))
+    print_taxes(gross_income, 2021, max(deductions, Money.of(12550)), Money.of(4900))
+    print_taxes(gross_income, 2022, max(deductions, Money.of(12950)), Money.of(5000))
     return 0
 
 
