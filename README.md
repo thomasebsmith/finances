@@ -36,6 +36,9 @@ $ ./scripts/test.sh
 - General financial utility classes
 - Basic tax computations
 
+### v0.2
+- Basic financial simulations
+
 ## License
 This library is released under the MIT License. See [LICENSE](./LICENSE) for
 details.
