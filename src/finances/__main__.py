@@ -57,8 +57,12 @@ def main():
     """Prints the amount of federal taxes on $100,000 in 2021 and 2022."""
     gross_income = Money.parse(input("Gross income: "))
     deductions = Money.parse(input("Itemized deductions: "))
-    print_taxes(gross_income, 2021, max(deductions, Money.of(12550)), Money.of(4900))
-    print_taxes(gross_income, 2022, max(deductions, Money.of(12950)), Money.of(5000))
+    print_taxes(
+        gross_income, 2021, max(deductions, Money.of(12550)), Money.of(4900)
+    )
+    print_taxes(
+        gross_income, 2022, max(deductions, Money.of(12950)), Money.of(5000)
+    )
     return 0
 
 
