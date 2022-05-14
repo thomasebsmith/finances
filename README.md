@@ -31,6 +31,8 @@ $ cd finances
 $ ./scripts/test.sh
 ```
 
+To lint this repository's code, run scripts/lint.sh.
+
 ## Roadmap
 ### v0.1 - In Progress
 - General financial utility classes
