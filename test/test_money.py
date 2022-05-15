@@ -65,3 +65,13 @@ def test_str():
     assert str(Money.of(27, 18)) == "$27.18"
     assert str(Money.of(NEGATIVE_ZERO, 35)) == "-$0.35"
     assert str(Money.of(-82, 6)) == "-$82.06"
+
+
+def test_add():
+    """Tests the behavior of Money.__add__."""
+    assert ZERO + Money.of(0) == ZERO
+    assert ZERO + Money.of(314, 15) == Money.of(314, 15)
+    assert Money.of(-19, 2) + Money.of(0) == Money.of(-19, 2)
+    assert Money.of(10) + Money.of(-10) == Money.of(0)
+    assert Money.of(31, 15) + Money.of(-28, 26) == Money.of(2, 89)
+    assert Money.of(8, 11) + Money.of(-20) == Money.of(-11, 89)
