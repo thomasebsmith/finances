@@ -75,3 +75,14 @@ def test_add():
     assert Money.of(10) + Money.of(-10) == Money.of(0)
     assert Money.of(31, 15) + Money.of(-28, 26) == Money.of(2, 89)
     assert Money.of(8, 11) + Money.of(-20) == Money.of(-11, 89)
+
+
+def test_sub():
+    """Tests the behavior of Money.__sub__."""
+    assert Money.of(0) - ZERO == ZERO
+    assert Money.of(6, 28) - Money.of(0) == Money.of(6, 28)
+    assert Money.of(-18, 25) - Money.of(-18, 25) == Money.of(0)
+    assert Money.of(29, 37) - Money.of(28, 1) == Money.of(1, 36)
+    assert Money.of(5, 90) - Money.of(101) == Money.of(-95, 10)
+    assert Money.of(-20, 10) - Money.of(-30, 50) == Money.of(10, 40)
+    assert Money.of(-60, 22) - Money.of(10, 23) == Money.of(-70, 45)
