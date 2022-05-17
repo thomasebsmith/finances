@@ -31,7 +31,12 @@ $ cd finances
 $ ./scripts/test.sh
 ```
 
-To lint this repository's code, run scripts/lint.sh.
+To lint this repository's code:
+```sh
+$ git clone https://github.com/thomasebsmith/finances.git
+$ cd finances
+$ ./scripts/lint.sh
+```
 
 ## Roadmap
 ### v0.1 - In Progress
