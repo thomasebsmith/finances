@@ -86,3 +86,15 @@ def test_sub():
     assert Money.of(5, 90) - Money.of(101) == Money.of(-95, 10)
     assert Money.of(-20, 10) - Money.of(-30, 50) == Money.of(10, 40)
     assert Money.of(-60, 22) - Money.of(10, 23) == Money.of(-70, 45)
+
+
+def test_mul():
+    """Test the behavior of Money.__mul__."""
+    assert ZERO * 0 == ZERO
+    assert Money.of(268, 11) * 0 == ZERO
+    assert Money.of(-1) * 0 == ZERO
+    assert ZERO * -1 == ZERO
+    assert Money.of(-314, 25) * 1 == Money.of(-314, 25)
+    assert Money.of(82, 22) * -1 == Money.of(-82, 22)
+    assert Money.of(-165, 40) * -3 == Money.of(496, 20)
+    assert Money.of(28, 37) * 22 == Money.of(624, 14)
