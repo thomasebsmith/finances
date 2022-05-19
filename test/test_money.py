@@ -89,7 +89,7 @@ def test_sub():
 
 
 def test_mul():
-    """Test the behavior of Money.__mul__."""
+    """Tests the behavior of Money.__mul__."""
     assert ZERO * 0 == ZERO
     assert Money.of(268, 11) * 0 == ZERO
     assert Money.of(-1) * 0 == ZERO
@@ -98,3 +98,16 @@ def test_mul():
     assert Money.of(82, 22) * -1 == Money.of(-82, 22)
     assert Money.of(-165, 40) * -3 == Money.of(496, 20)
     assert Money.of(28, 37) * 22 == Money.of(624, 14)
+
+
+def test_grow_and_round():
+    """Tests the behavior of Money.grow_and_round."""
+    assert ZERO.grow_and_round(0.0) == ZERO
+    assert ZERO.grow_and_round(1.0) == Money.of(0)
+    assert Money.of(123).grow_and_round(0.0) == ZERO
+    assert Money.of(-9, 87).grow_and_round(0.0) == ZERO
+    assert Money.of(1000, 0).grow_and_round(1.5) == Money.of(1500)
+    assert Money.of(-953, 66).grow_and_round(0.782) == Money.of(-745, 76)
+    assert Money.of(22000, 78).grow_and_round(12345.6789) == Money.of(
+        271614565, 43
+    )
