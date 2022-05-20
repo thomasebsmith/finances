@@ -46,6 +46,9 @@ $ ./scripts/lint.sh
 ### v0.2
 - Basic financial simulations
 
+### v0.3
+- Financial simulations based on historical data
+
 ## License
 This library is released under the MIT License. See [LICENSE](./LICENSE) for
 details.
