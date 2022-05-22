@@ -8,4 +8,5 @@ if [ ! -d "$VENV_DIR" ]; then
 fi
 
 . "$VENV_DIR/bin/activate" || exit 1
+
 pip install -q --upgrade pip
