@@ -2,6 +2,8 @@
 
 from argparse import ArgumentParser
 
+from .simulation import Simulation
+
 
 def main():
     """Simulates personal finances."""
@@ -21,9 +23,9 @@ def main():
         help="The year in which to end the simulation",
     )
     args = parser.parse_args()
-    print("Hello from simulate!")
-    print(f"Starting in {args.start}")
-    print(f"Ending in {args.end}")
+
+    simulation = Simulation(args.start, args.end)
+    simulation.run()
 
 
 if __name__ == "__main__":
