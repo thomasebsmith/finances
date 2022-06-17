@@ -16,11 +16,14 @@ You will need:
 It is recommended to install and run this library in a virtual environment.
 However, doing so is not required.
 
-To run an example program that uses this library:
+To run an example program that uses this library (and create a corresponding
+virtual environment):
 ```sh
 $ git clone https://github.com/thomasebsmith/finances.git
 $ cd finances
-$ python3 -m src.finances.__main__
+$ . ./scripts/venv.sh
+$ pip install .
+$ finances
 ```
 
 To run this library's unit tests (this will automatically create a virtual
