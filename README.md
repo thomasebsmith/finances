@@ -34,7 +34,8 @@ $ cd finances
 $ ./scripts/test.sh
 ```
 
-To lint this repository's code:
+To lint this repository's code (this will automatically create a virtual
+environment and install linting dependencies in it):
 ```sh
 $ git clone https://github.com/thomasebsmith/finances.git
 $ cd finances
