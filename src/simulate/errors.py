@@ -7,3 +7,7 @@ class SimulationError(Exception):
 
 class SimulationParameterError(SimulationError):
     """An error because of invalid simulation parameters."""
+
+
+class SimulationInternalError(SimulationError):
+    """An unexpected error that occurred while running a simulation."""
