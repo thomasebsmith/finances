@@ -9,6 +9,7 @@ financial simulation functionality in the future.
 
 ## Prerequisites
 You will need:
+- Git (to clone this repository)
 - Python >= 3.8
 - POSIX sh (to run testing/linting scripts)
 
