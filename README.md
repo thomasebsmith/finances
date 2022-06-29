@@ -18,7 +18,7 @@ It is recommended to install and run this library in a virtual environment.
 However, doing so is not required.
 
 To run an example program that uses this library (this will automatically
-create a virtual environment):
+create and use a virtual environment):
 ```sh
 $ git clone https://github.com/thomasebsmith/finances.git
 $ cd finances
