@@ -1,6 +1,7 @@
 """Tests of src/simulate/growth.py."""
 
 from finances import Money
+from finances.money import NEGATIVE_ZERO
 from simulate.growth import grow
 
 
@@ -14,3 +15,4 @@ def test_grow():
     assert grow(Money.of(-66, 55), 1.0, -98) == Money.of(-66, 55)
 
     assert grow(Money.of(12, 45), 1.5, 9) == Money.of(478, 62)
+    assert grow(Money.of(-6, 55), 0.5, 3) == Money.of(NEGATIVE_ZERO, 82)
