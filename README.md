@@ -47,6 +47,7 @@ $ ./scripts/lint.sh
 ### v0.1 - In Progress
 - General financial utility classes
 - Basic tax computations
+- Placeholder simulation utility
 
 ### v0.2
 - Basic financial simulations
