@@ -53,6 +53,7 @@ $ ./scripts/lint.sh
 - Basic financial simulations
 
 ### v0.3
+- Detailed historical tax calculations
 - Financial simulations based on historical data
 
 ## License
