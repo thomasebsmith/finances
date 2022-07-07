@@ -56,6 +56,9 @@ $ ./scripts/lint.sh
 - Detailed historical tax calculations
 - Financial simulations based on historical data
 
+### v0.4
+- Simulated financial predictions
+
 ## License
 This library is released under the MIT License. See [LICENSE](./LICENSE) for
 details.
