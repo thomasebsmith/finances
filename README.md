@@ -11,7 +11,7 @@ financial simulation functionality in the future.
 You will need:
 - Git (to clone this repository)
 - Python >= 3.8 (to use this library)
-- POSIX sh (to run the testing and linting scripts)
+- POSIX-compatible sh (to run the testing and linting scripts)
 
 ## Quick Start
 It is recommended to install and run this library in a virtual environment.
