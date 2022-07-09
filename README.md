@@ -51,6 +51,7 @@ $ ./scripts/lint.sh
 
 ### v0.2
 - Basic financial simulations
+- Account abstraction
 
 ### v0.3
 - Detailed historical tax calculations
