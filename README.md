@@ -59,6 +59,7 @@ $ ./scripts/lint.sh
 
 ### v0.4
 - Simulated financial predictions
+- Historical prediction accuracy analysis
 
 ## License
 This library is released under the MIT License. See [LICENSE](./LICENSE) for
