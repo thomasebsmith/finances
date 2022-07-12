@@ -61,6 +61,11 @@ $ ./scripts/lint.sh
 - Simulated financial predictions
 - Historical prediction accuracy analysis
 
+## Future Ideas
+In the more distant future, this project could include:
+- A tax calculation GUI
+- A simulation GUI
+
 ## License
 This library is released under the MIT License. See [LICENSE](./LICENSE) for
 details.
