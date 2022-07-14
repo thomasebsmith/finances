@@ -44,7 +44,7 @@ $ ./scripts/lint.sh
 ```
 
 ## Roadmap
-Before v1.0, this project will contain a complete financial utilities and
+By v1.0, this project will contain a complete financial utilities and
 simulation library.
 
 ### v0.1 - In Progress
