@@ -51,6 +51,7 @@ simulation library.
 - General financial utility classes
 - Basic tax computations
 - Placeholder simulation utility
+- Basic testing and linting
 
 ### v0.2
 - Basic financial simulations
