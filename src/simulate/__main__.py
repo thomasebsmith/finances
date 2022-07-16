@@ -5,7 +5,7 @@ from argparse import ArgumentParser
 from .simulation import Simulation
 
 
-def main():
+def main() -> None:
     """Simulates personal finances."""
     parser = ArgumentParser(description="Simulate personal finances.")
     parser.add_argument(

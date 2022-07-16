@@ -15,7 +15,7 @@ class Simulation:
         self.start = start
         self.end = end
 
-    def run(self):
+    def run(self) -> None:
         """Runs the simulation."""
         print("Hello from simulate!")
         print(f"Starting in {self.start}")

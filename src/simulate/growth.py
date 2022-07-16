@@ -7,7 +7,7 @@ from finances import Money
 from .errors import SimulationParameterError
 
 
-def _ensure_positive(number: float, description: str):
+def _ensure_positive(number: float, description: str) -> None:
     if number <= 0.0:
         raise SimulationParameterError(
             f"{description} must be positive but is {number}"

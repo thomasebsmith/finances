@@ -15,7 +15,7 @@ def print_taxes(
     year: int,
     deductions: Money,
     personal_exemption: Money,
-):
+) -> None:
     """
     Prints the taxes required for a single person's income.
 
@@ -53,7 +53,7 @@ def print_taxes(
     print(f"{year} taxes on {gross_income}: {taxes}")
 
 
-def main():
+def main() -> int:
     """Prints the amount of federal taxes on $100,000 in 2021 and 2022."""
     gross_income = Money.parse(input("Gross income: "))
     deductions = Money.parse(input("Itemized deductions: "))

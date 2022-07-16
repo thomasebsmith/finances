@@ -26,7 +26,7 @@ class EarningsTaxPolicy:
     floor: Optional[Money] = None
     ceiling: Optional[Money] = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.floor is not None and self.ceiling is not None:
             assert self.floor <= self.ceiling, "floor must not exceed ceiling"
 
