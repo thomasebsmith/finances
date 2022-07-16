@@ -28,9 +28,11 @@ class BracketTax:
                 threshold should be distinct.
             policy - The policy to use to determine taxable income.
         """
-        self.brackets = sorted(
-            brackets, key=lambda b: b.threshold, reverse=True
-        )
+
+        def get_threshold(bracket: Bracket) -> Money:
+            return bracket.threshold
+
+        self.brackets = sorted(brackets, key=get_threshold, reverse=True)
         self.policy = policy
 
     def calculate(self, earnings: Earnings) -> Money:

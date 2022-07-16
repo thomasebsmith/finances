@@ -38,21 +38,21 @@ TAX_POLICY_3 = EarningsTaxPolicy(
 )
 
 
-def test_agi():
+def test_agi() -> None:
     """Tests the behavior of Earnings.agi."""
     assert EARNINGS_1.agi(TaxCategory.FEDERAL) == Money.of(91000)
     assert EARNINGS_1.agi(TaxCategory.STATE) == Money.of(92000)
     assert EARNINGS_1.agi(TaxCategory.LOCAL) == Money.of(93000)
 
 
-def test_magi():
+def test_magi() -> None:
     """Tests the behavior of Earnings.magi."""
     assert EARNINGS_1.magi(TaxCategory.FEDERAL) == Money.of(91100)
     assert EARNINGS_1.magi(TaxCategory.STATE) == Money.of(92200)
     assert EARNINGS_1.magi(TaxCategory.LOCAL) == Money.of(93300)
 
 
-def test_taxable_income():
+def test_taxable_income() -> None:
     """Tests the behavior of Earnings.taxable_income."""
     assert EARNINGS_1.taxable_income(TAX_POLICY_1) == Money.of(100000)
     assert EARNINGS_1.taxable_income(TAX_POLICY_2) == Money.of(92500)

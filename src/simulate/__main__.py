@@ -1,6 +1,7 @@
 """A program for simulating personal finances."""
 
 from argparse import ArgumentParser
+from typing import cast
 
 from .simulation import Simulation
 
@@ -24,7 +25,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    simulation = Simulation(args.start, args.end)
+    simulation = Simulation(cast(int, args.start), cast(int, args.end))
     simulation.run()
 
 
