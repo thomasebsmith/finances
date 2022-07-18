@@ -47,7 +47,7 @@ $ ./scripts/lint.sh
 By v1.0, this project will contain a complete financial utilities and
 simulation library.
 
-### v0.1 - In Progress
+### v0.1 (released 2022-07-17)
 - General financial utility classes
 - Basic tax computations
 - Placeholder simulation utility
