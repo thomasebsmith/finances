@@ -53,7 +53,7 @@ simulation library.
 - Placeholder simulation utility
 - Basic testing and linting
 
-### v0.2
+### v0.2 (in progress)
 - Basic financial simulations
 - Account abstraction
 
