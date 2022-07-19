@@ -54,7 +54,7 @@ simulation library.
 - Basic testing and linting
 
 ### v0.2 (in progress)
-- Basic financial simulations
+- Basic financial simulations (inflation, market returns, etc.)
 - Account abstraction
 
 ### v0.3
