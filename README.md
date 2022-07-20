@@ -56,6 +56,8 @@ simulation library.
 ### v0.2 (in progress)
 - Basic financial simulations (inflation, market returns, etc.)
 - Account abstraction
+- Variable distributions
+- Confidence intervals
 
 ### v0.3
 - Detailed historical tax calculations
