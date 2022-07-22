@@ -54,7 +54,7 @@ simulation library.
 - Basic testing and linting
 
 ### v0.2 (in progress)
-- Basic financial simulations (inflation, market returns, etc.)
+- Basic financial simulations (inflation, investment returns, etc.)
 - Account abstraction
 - Variable distributions
 - Confidence intervals based on variable distributions over time
