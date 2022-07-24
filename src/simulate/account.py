@@ -1,13 +1,10 @@
 """Contains a class representing a financial account."""
 
-from typing import TypeVar
-
-
-T = TypeVar("T")
+from finances.utilities import AddableT
 
 
 class Account:
     """Represents a financial account."""
 
-    def __init__(self, balance: T):
+    def __init__(self, balance: AddableT):
         self.balance = balance
