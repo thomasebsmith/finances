@@ -4,7 +4,11 @@ from finances.utilities import AddableT
 
 
 class Account:
-    """Represents a financial account."""
+    """
+    Represents a financial account.
+
+    The account can contain any Addable type, such as Money or Value.
+    """
 
     def __init__(self, balance: AddableT):
         """Creates an Account."""
