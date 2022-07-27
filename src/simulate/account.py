@@ -11,7 +11,12 @@ class Account:
     """
 
     def __init__(self, balance: AddableT):
-        """Creates an Account."""
+        """
+        Creates an Account.
+
+        Arguments:
+            balance - The initial balance of the account.
+        """
         self._balance = balance
 
     def balance(self) -> AddableT:
