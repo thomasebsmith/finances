@@ -1,9 +1,11 @@
 """Contains a class representing a financial account."""
 
+from typing import Generic
+
 from finances.utilities import AddableT
 
 
-class Account:
+class Account(Generic[AddableT]):
     """
     Represents a financial account.
 
