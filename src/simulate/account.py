@@ -10,6 +10,8 @@ class Account(Generic[AddableT]):
     Represents a financial account.
 
     The account can contain any Addable type, such as Money or Value.
+
+    Example: my_account = Account[Money](Money.of(314, 15))
     """
 
     def __init__(self, balance: AddableT):
