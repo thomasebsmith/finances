@@ -16,7 +16,7 @@ class Account(Generic[AddableT]):
 
     def __init__(self, balance: AddableT):
         """
-        Creates an Account.
+        Creates an Account with a starting balance.
 
         Arguments:
             balance - The initial balance of the account.
@@ -24,7 +24,7 @@ class Account(Generic[AddableT]):
         self._balance = balance
 
     def balance(self) -> AddableT:
-        """Retrieves the account balance."""
+        """Retrieves the current account balance."""
         return self._balance
 
     def __iadd__(self, other: AddableT) -> None:
