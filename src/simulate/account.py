@@ -1,5 +1,7 @@
 """Contains a class representing a financial account."""
 
+from __future__ import annotations
+
 from typing import Generic
 
 from finances.utilities import AddableT
@@ -38,3 +40,8 @@ class Account(Generic[AddableT]):
     def __imul__(self, other: int) -> None:
         """Multiplies this account's balance by an integer."""
         self._balance *= other
+
+    def transfer(self, amount: AddableT, to_account: Account[AddableT]) -> None:
+        """Transfers an amount of this account's balance to another account."""
+        self._balance -= amount
+        to_account._balance += amount
