@@ -29,19 +29,25 @@ class Account(Generic[AddableT]):
         """Retrieves the current account balance."""
         return self._balance
 
-    def __iadd__(self, other: AddableT) -> None:
+    def __iadd__(self, other: AddableT) -> Account[AddableT]:
         """Adds other to this account's balance."""
         self._balance += other
+        return self
 
-    def __isub__(self, other: AddableT) -> None:
+    def __isub__(self, other: AddableT) -> Account[AddableT]:
         """Subtracts other from this account's balance."""
         self._balance -= other
+        return self
 
-    def __imul__(self, other: int) -> None:
+    def __imul__(self, other: int) -> Account[AddableT]:
         """Multiplies this account's balance by an integer."""
         self._balance *= other
+        return self
 
-    def transfer(self, amount: AddableT, to_account: Account[AddableT]) -> None:
+    def transfer(
+        self, amount: AddableT, to_account: Account[AddableT]
+    ) -> Account[AddableT]:
         """Transfers an amount of this account's balance to another account."""
         self._balance -= amount
         to_account._balance += amount
+        return self
