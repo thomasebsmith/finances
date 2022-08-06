@@ -48,3 +48,24 @@ def test_subtract() -> None:
     assert acct2.balance() == Value.of_inflated_money(
         Money.of(-20, 20), inflation_since_2000=3.0
     )
+
+
+def test_multiply() -> None:
+    """Tests the behavior of Account.__imul__."""
+    acct = Account(Money.of(-31, 41))
+    acct *= 4
+    assert acct.balance() == Money.of(-125, 64)
+    acct *= -1
+    assert acct.balance() == Money.of(125, 64)
+
+    acct2 = Account(
+        Value.of_inflated_money(Money.of(10), inflation_since_2000=0)
+    )
+    acct2 *= -5
+    assert acct2.balance() == Value.of_inflated_money(
+        Money.of(-100), inflation_since_2000=1.0
+    )
+    acct2 *= 0
+    assert acct2.balance() == Value.of_inflated_money(
+        Money.of(0), inflation_since_2000=-0.9876
+    )
