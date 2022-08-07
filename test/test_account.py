@@ -69,3 +69,24 @@ def test_multiply() -> None:
     assert acct2.balance() == Value.of_inflated_money(
         Money.of(0), inflation_since_2000=-0.9876
     )
+
+
+def test_transfer() -> None:
+    """Tests the behavior of Account.transfer."""
+    acct = Account(Money.of(-100))
+    acct2 = Account(Money.of(101))
+
+    acct.transfer(Money.of(50), to_account=acct2)
+    assert acct.balance() == Money.of(-150)
+    assert acct2.balance() == Money.of(151)
+
+    acct2.transfer(Money.of(-100), to_account=acct)
+    assert acct.balance() == Money.of(-250)
+    assert acct2.balance() == Money.of(251)
+
+    acct.transfer(Money.of(100), to_account=acct)
+    assert acct.balance() == Money.of(-250)
+
+    acct2.transfer(Money.of(251), to_account=acct)
+    assert acct.balance() == Money.of(1)
+    assert acct2.balance() == Money.of(0)
