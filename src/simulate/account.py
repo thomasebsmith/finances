@@ -47,7 +47,11 @@ class Account(Generic[AddableT]):
     def transfer(
         self, amount: AddableT, to_account: Account[AddableT]
     ) -> Account[AddableT]:
-        """Transfers an amount of this account's balance to another account."""
+        """
+        Transfers an amount of this account's balance to another account.
+
+        The amount and/or account balance can be negative.
+        """
         self._balance -= amount
         to_account._balance += amount
         return self
