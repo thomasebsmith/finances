@@ -51,6 +51,11 @@ class Account(Generic[AddableT]):
         Transfers an amount of this account's balance to another account.
 
         The amount and/or account balance can be negative.
+
+        Arguments:
+            amount - The amount to transfer.
+            to_account - The acount to transfer amount to.
+        Return value: This account.
         """
         self._balance -= amount
         to_account._balance += amount
