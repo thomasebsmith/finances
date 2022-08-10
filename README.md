@@ -55,9 +55,10 @@ simulation library.
 
 ### v0.2 (in progress)
 - Basic financial simulations (inflation, investment returns, etc.)
-- Account abstraction (with ability to transfer among accounts)
 - Variable distributions
 - Confidence intervals based on variable distributions over time
+- Account abstraction (with ability to transfer among accounts and ability to
+  store variable distributions)
 
 ### v0.3
 - Detailed historical tax calculations
