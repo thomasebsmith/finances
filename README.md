@@ -67,7 +67,7 @@ simulation library.
 
 ### v0.4
 - Simulated financial predictions
-- Historical prediction accuracy analysis
+- Historical prediction accuracy analysis and adjustments
 
 ## Future Ideas
 In the more distant future, this project could include:
