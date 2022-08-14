@@ -54,5 +54,13 @@ class Value:
         """Creates a new Value with the product of this Value and other."""
         return Value(self._year_2000_usd_cents * other)
 
+    def grow_and_round(self, ratio: float) -> Value:
+        """
+        Creates a new Value with the product of this Value and ratio.
+
+        The Value is rounded to the nearest USD 2000 cent.
+        """
+        return Value(round(self._year_2000_usd_cents * ratio))
+
 
 ZERO = Value(0)
