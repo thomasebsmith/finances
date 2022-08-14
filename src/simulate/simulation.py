@@ -1,5 +1,9 @@
 """Contains a class for represention a financial simulation."""
 
+from finances import Money
+
+from .account import Account
+
 
 class Simulation:
     """Represents a financial simulation."""
@@ -14,9 +18,14 @@ class Simulation:
         """
         self.start = start
         self.end = end
+        self.investments = Account(Money.of(1000))
 
     def run(self) -> None:
         """Runs the simulation."""
-        print("Hello from simulate!")
-        print(f"Starting in {self.start}")
-        print(f"Ending before {self.end}")
+        print(f"Balance starting at {self.investments.balance()}")
+
+        growth_rate = 1.10
+        for _ in range(self.start, self.end):
+            self.investments.grow_and_round(growth_rate)
+
+        print(f"Balance ending at {self.investments.balance()}")

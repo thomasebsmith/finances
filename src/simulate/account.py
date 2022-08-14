@@ -44,6 +44,11 @@ class Account(Generic[AddableT]):
         self._balance *= other
         return self
 
+    def grow_and_round(self, ratio: float) -> Account[AddableT]:
+        """Multiply's this account's balance by ratio, rounding."""
+        self._balance = self._balance.grow_and_round(ratio)
+        return self
+
     def transfer(
         self, amount: AddableT, to_account: Account[AddableT]
     ) -> Account[AddableT]:

@@ -21,3 +21,6 @@ class Addable(Protocol):
 
     def __mul__(self: AddableT, other: int) -> AddableT:
         """Multiplies this instance by other."""
+
+    def grow_and_round(self: AddableT, ratio: float) -> AddableT:
+        """Multiplies this instance by ratio, rounding."""
