@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Generic
+from typing import Callable, Generic
 
 from finances.utilities import AddableT
 
@@ -64,4 +64,11 @@ class Account(Generic[AddableT]):
         """
         self._balance -= amount
         to_account._balance += amount
+        return self
+
+    def apply(
+        self, balance_modifier: Callable[[AddableT], AddableT]
+    ) -> Account[AddableT]:
+        """Applies balance_modifier to this account's balance."""
+        self._balance = balance_modifier(self._balance)
         return self
