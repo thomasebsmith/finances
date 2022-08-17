@@ -3,6 +3,7 @@
 from finances import Money
 
 from .account import Account
+from .growth import grow
 
 
 class Simulation:
@@ -24,8 +25,9 @@ class Simulation:
         """Runs the simulation."""
         print(f"Balance starting at {self.investments.balance()}")
 
-        growth_rate = 1.10
-        for _ in range(self.start, self.end):
-            self.investments.grow_and_round(growth_rate)
+        def grow_money(money: Money) -> Money:
+            return grow(money, growth_rate=1.10, time=self.end - self.start)
+
+        self.investments.apply(grow_money)
 
         print(f"Balance ending at {self.investments.balance()}")
