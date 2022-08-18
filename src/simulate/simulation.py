@@ -3,6 +3,7 @@
 from finances import Money
 
 from .account import Account
+from .errors import SimulationParameterError
 from .growth import grow
 
 
@@ -17,6 +18,8 @@ class Simulation:
             start - The year in which the simulation should start, inclusive.
             end - The year in which the simulation should end, exclusive.
         """
+        if start > end:
+            raise SimulationParameterError("end year must be after start")
         self.start = start
         self.end = end
         self.investments = Account(Money.of(1000))
