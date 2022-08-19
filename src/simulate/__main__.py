@@ -3,6 +3,8 @@
 from argparse import ArgumentParser
 from typing import cast
 
+from finances import Money
+
 from .simulation import Simulation
 
 
@@ -23,9 +25,21 @@ def main() -> None:
         required=True,
         help="The year in which to end the simulation",
     )
+    parser.add_argument(
+        "--starting-balance",
+        metavar="MONEY",
+        type=Money.parse,
+        required=True,
+        help="The balance to start the simulation with, in USD",
+    )
     args = parser.parse_args()
 
-    simulation = Simulation(cast(int, args.start), cast(int, args.end))
+    simulation = Simulation(
+        cast(int, args.start),
+        cast(int, args.end),
+        cast(Money, args.starting_balance),
+    )
+
     simulation.run()
 
 

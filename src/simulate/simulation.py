@@ -10,19 +10,20 @@ from .growth import grow
 class Simulation:
     """Represents a financial simulation."""
 
-    def __init__(self, start: int, end: int):
+    def __init__(self, start: int, end: int, starting_balance: Money):
         """
         Creates a simulation.
 
         Arguments:
             start - The year in which the simulation should start, inclusive.
             end - The year in which the simulation should end, exclusive.
+            starting_balance - The balance the simulation should start with.
         """
         if start > end:
             raise SimulationParameterError("end year must be after start")
         self.start = start
         self.end = end
-        self.investments = Account(Money.of(1000))
+        self.investments = Account(starting_balance)
 
     def run(self) -> None:
         """Runs the simulation."""
