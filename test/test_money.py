@@ -65,6 +65,7 @@ def test_str() -> None:
     assert str(Money.of(27, 18)) == "$27.18"
     assert str(Money.of(NEGATIVE_ZERO, 35)) == "-$0.35"
     assert str(Money.of(-82, 6)) == "-$82.06"
+    assert str(Money.of(-20)) == "-$20.00"
 
 
 def test_add() -> None:
