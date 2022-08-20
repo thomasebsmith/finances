@@ -44,6 +44,7 @@ def test_extra_cents() -> None:
     assert Money(-99).extra_cents() == 99
     assert Money.of(-1, 1).extra_cents() == 1
     assert Money.of(-85, 50).extra_cents() == 50
+    assert Money.of(-100).extra_cents() == 0
 
 
 def test_all_cents() -> None:
