@@ -1,5 +1,7 @@
 """Contains a class for represention a financial simulation."""
 
+from typing import Protocol
+
 from finances import Money
 
 from .account import Account
@@ -7,12 +9,19 @@ from .errors import SimulationParameterError
 from .growth import grow
 
 
-class Simulation:
+class Simulation(Protocol):
     """Represents a financial simulation."""
+
+    def run(self, iterations: int) -> None:
+        """Runs this simulation a number of times."""
+
+
+class BasicSimulation(Simulation):
+    """Represents a basic financial simulation."""
 
     def __init__(self, start: int, end: int, starting_balance: Money):
         """
-        Creates a simulation.
+        Creates a basic simulation.
 
         Arguments:
             start - The year in which the simulation should start, inclusive.
@@ -25,7 +34,7 @@ class Simulation:
         self.end = end
         self.investments = Account(starting_balance)
 
-    def run(self) -> None:
+    def run(self, iterations: int) -> None:
         """Runs the simulation."""
         print(f"Balance starting at {self.investments.balance()}")
 

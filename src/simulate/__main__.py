@@ -5,7 +5,7 @@ from typing import cast
 
 from finances import Money
 
-from .simulation import Simulation
+from .simulation import BasicSimulation, Simulation
 
 
 def main() -> None:
@@ -34,13 +34,13 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    simulation = Simulation(
+    simulation: Simulation = BasicSimulation(
         cast(int, args.start),
         cast(int, args.end),
         cast(Money, args.starting_balance),
     )
 
-    simulation.run()
+    simulation.run(1)
 
 
 if __name__ == "__main__":
