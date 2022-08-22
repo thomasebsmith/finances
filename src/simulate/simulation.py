@@ -13,7 +13,15 @@ class Simulation(Protocol):
     """Represents a financial simulation."""
 
     def run(self, iterations: int) -> None:
-        """Runs this simulation a number of times."""
+        """
+        Runs this simulation a number of times.
+
+        This simulation's results should be the distribution of outcomes from
+        all the simulated runs.
+
+        Arguments:
+            iterations - The number of times to run the simulation.
+        """
 
 
 class BasicSimulation(Simulation):
