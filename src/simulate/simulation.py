@@ -43,7 +43,6 @@ class BasicSimulation(Simulation):
         self.investments = Account(starting_balance)
 
     def run(self, iterations: int) -> None:
-        """Runs the simulation."""
         print(f"Balance starting at {self.investments.balance()}")
 
         def grow_money(money: Money) -> Money:
