@@ -69,6 +69,13 @@ class Account(Generic[AddableT]):
     def apply(
         self, balance_modifier: Callable[[AddableT], AddableT]
     ) -> Account[AddableT]:
-        """Applies balance_modifier to this account's balance."""
+        """
+        Applies balance_modifier to this account's balance.
+
+        Arguments:
+            balance_modifier - A function to call on this account's balance.
+                The account's new balance will be set to its return value.
+        Return value: This account.
+        """
         self._balance = balance_modifier(self._balance)
         return self
