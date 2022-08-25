@@ -24,3 +24,25 @@ class Addable(Protocol):
 
     def grow_and_round(self: AddableT, ratio: float) -> AddableT:
         """Multiplies this instance by ratio, rounding."""
+
+
+ComparableT = TypeVar("ComparableT", bound="Comparable")
+
+
+class Comparable(Protocol):
+    """A type that can be compared with itself."""
+
+    def __eq__(self: ComparableT, other: object) -> bool:
+        """Checks whether self is equal to other."""
+
+    def __lt__(self: ComparableT, other: ComparableT) -> bool:
+        """Checks whether self is less than other."""
+
+    def __le__(self: ComparableT, other: ComparableT) -> bool:
+        """Checks whether self is less than or equal to other."""
+
+    def __gt__(self: ComparableT, other: ComparableT) -> bool:
+        """Checks whether self is greater than other."""
+
+    def __ge__(self: ComparableT, other: ComparableT) -> bool:
+        """Checks whether self is greater than or equal to other."""
