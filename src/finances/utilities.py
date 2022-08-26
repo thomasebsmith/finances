@@ -46,3 +46,7 @@ class Comparable(Protocol):
 
     def __ge__(self: ComparableT, other: ComparableT) -> bool:
         """Checks whether self is greater than or equal to other."""
+
+
+class AddableComparable(Addable, Comparable, Protocol):
+    """A type that is both Addable and Comparable."""
