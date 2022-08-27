@@ -2,21 +2,25 @@
 
 from __future__ import annotations
 
-from typing import Callable, Generic
+from typing import Callable, Generic, TypeVar
 
-from finances.utilities import AddableT
+from finances.utilities import AddableComparable
 
 
-class Account(Generic[AddableT]):
+AddableComparableT = TypeVar("AddableComparableT", bound=AddableComparable)
+
+
+class Account(Generic[AddableComparableT]):
     """
     Represents a financial account.
 
-    The account can contain any Addable type, such as Money or Value.
+    The account can contain any Addable and Comparable type, such as Money or
+    Value.
 
     Example: my_account = Account[Money](Money.of(314, 15))
     """
 
-    def __init__(self, balance: AddableT):
+    def __init__(self, balance: AddableComparableT):
         """
         Creates an Account with a starting balance.
 
@@ -25,33 +29,39 @@ class Account(Generic[AddableT]):
         """
         self._balance = balance
 
-    def balance(self) -> AddableT:
+    def balance(self) -> AddableComparableT:
         """Retrieves the current account balance."""
         return self._balance
 
-    def __iadd__(self, other: AddableT) -> Account[AddableT]:
+    def __iadd__(
+        self, other: AddableComparableT
+    ) -> Account[AddableComparableT]:
         """Adds other to this account's balance."""
         self._balance += other
         return self
 
-    def __isub__(self, other: AddableT) -> Account[AddableT]:
+    def __isub__(
+        self, other: AddableComparableT
+    ) -> Account[AddableComparableT]:
         """Subtracts other from this account's balance."""
         self._balance -= other
         return self
 
-    def __imul__(self, other: int) -> Account[AddableT]:
+    def __imul__(self, other: int) -> Account[AddableComparableT]:
         """Multiplies this account's balance by an integer."""
         self._balance *= other
         return self
 
-    def grow_and_round(self, ratio: float) -> Account[AddableT]:
+    def grow_and_round(self, ratio: float) -> Account[AddableComparableT]:
         """Multiply's this account's balance by ratio, rounding."""
         self._balance = self._balance.grow_and_round(ratio)
         return self
 
     def transfer(
-        self, amount: AddableT, to_account: Account[AddableT]
-    ) -> Account[AddableT]:
+        self,
+        amount: AddableComparableT,
+        to_account: Account[AddableComparableT],
+    ) -> Account[AddableComparableT]:
         """
         Transfers an amount of this account's balance to another account.
 
@@ -67,8 +77,9 @@ class Account(Generic[AddableT]):
         return self
 
     def apply(
-        self, balance_modifier: Callable[[AddableT], AddableT]
-    ) -> Account[AddableT]:
+        self,
+        balance_modifier: Callable[[AddableComparableT], AddableComparableT],
+    ) -> Account[AddableComparableT]:
         """
         Applies balance_modifier to this account's balance.
 
