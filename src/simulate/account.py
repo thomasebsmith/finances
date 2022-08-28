@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Callable, Generic, TypeVar
 
 from finances.utilities import AddableComparable
@@ -10,6 +11,7 @@ from finances.utilities import AddableComparable
 AddableComparableT = TypeVar("AddableComparableT", bound=AddableComparable)
 
 
+@dataclass(frozen=False, order=True)
 class Account(Generic[AddableComparableT]):
     """
     Represents a financial account.
@@ -20,14 +22,7 @@ class Account(Generic[AddableComparableT]):
     Example: my_account = Account[Money](Money.of(314, 15))
     """
 
-    def __init__(self, balance: AddableComparableT):
-        """
-        Creates an Account with a starting balance.
-
-        Arguments:
-            balance - The initial balance of the account.
-        """
-        self._balance = balance
+    _balance: AddableComparableT
 
     def balance(self) -> AddableComparableT:
         """Retrieves the current account balance."""
