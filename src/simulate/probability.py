@@ -1,5 +1,7 @@
 """Contains a class that represents a probability."""
 
+from __future__ import annotations
+
 from fractions import Fraction
 
 from .errors import SimulationInternalError
@@ -7,6 +9,9 @@ from .errors import SimulationInternalError
 
 class Probability:
     """Represents the probability of an event."""
+
+    ZERO: Probability
+    ONE: Probability
 
     def __init__(self, value: Fraction) -> None:
         """
@@ -21,3 +26,7 @@ class Probability:
     def value(self) -> Fraction:
         """Returns this probability's value (in the range 0-1)."""
         return self._value
+
+
+Probability.ZERO = Probability(Fraction(0))
+Probability.ONE = Probability(Fraction(1))
