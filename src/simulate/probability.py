@@ -2,26 +2,26 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from fractions import Fraction
+from typing import ClassVar
 
 from .errors import SimulationInternalError
 
 
+@dataclass(frozen=True, order=True)
 class Probability:
-    """Represents the probability of an event."""
+    """Represents the probability of an event, where 0 is 0% and 1 is 100%."""
 
-    ZERO: Probability
-    ONE: Probability
+    _value: Fraction
 
-    def __init__(self, value: Fraction) -> None:
-        """
-        Initializes this probability, where 0 is 0% and 1 is 100%.
+    ZERO: ClassVar[Probability]
+    ONE: ClassVar[Probability]
 
-        value must be between 0 and 1.
-        """
-        if value < 0 or value > 1:
-            raise SimulationInternalError(f"Invalid probability {value}")
-        self._value = value
+    def __post_init__(self) -> None:
+        """Checks that self._value is between 0 and 1."""
+        if self._value < 0 or self._value > 1:
+            raise SimulationInternalError(f"Invalid probability {self._value}")
 
     def value(self) -> Fraction:
         """Returns this probability's value (in the range 0-1)."""
