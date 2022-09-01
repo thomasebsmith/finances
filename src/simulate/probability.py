@@ -27,6 +27,15 @@ class Probability:
         """Returns this probability's value (in the range 0-1)."""
         return self._value
 
+    def __add__(self, other: Probability) -> Probability:
+        """Determines the probability of either of two disjoint events."""
+        # __post_init__ will check that this is valid
+        return Probability(self._value + other._value)
+
+    def __mul__(self, other: Probability) -> Probability:
+        """Determines the probability of both of two independent events."""
+        return Probability(self._value * other._value)
+
 
 Probability.ZERO = Probability(Fraction(0))
 Probability.ONE = Probability(Fraction(1))
