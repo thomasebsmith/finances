@@ -16,7 +16,7 @@ def test_value() -> None:
 
 
 def test_add() -> None:
-    """Tests the behavior of Probability.add."""
+    """Tests the behavior of Probability.__add__."""
     assert Probability.ZERO + Probability.ONE == Probability.ONE
     assert Probability.ONE + Probability.ZERO == Probability.ONE
     assert Probability(Fraction(0)) + Probability.ZERO == Probability.ZERO
