@@ -29,3 +29,20 @@ def test_add() -> None:
     assert Probability(Fraction(1, 100)) + Probability(
         Fraction(2, 25)
     ) == Probability(Fraction(9, 100))
+
+
+def test_multiply() -> None:
+    """Tests the behavior of Probability.__mul__."""
+    assert Probability.ZERO * Probability.ZERO == Probability.ZERO
+    assert Probability.ONE * Probability.ONE == Probability.ONE
+    assert Probability.ZERO * Probability.ONE == Probability.ZERO
+    assert Probability.ONE * Probability.ZERO == Probability.ZERO
+    assert Probability(Fraction(1, 2)) * Probability.ONE == Probability(
+        Fraction(1, 2)
+    )
+    assert Probability(Fraction(3, 7)) * Probability(
+        Fraction(88, 89)
+    ) == Probability(Fraction(264, 623))
+    assert Probability(Fraction(21, 24)) * Probability(
+        Fraction(15, 29)
+    ) == Probability(Fraction(105, 232))
