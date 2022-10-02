@@ -46,7 +46,7 @@ $ ./scripts/lint.sh
 
 ## Roadmap
 By v1.0, this project will contain a complete financial utilities and
-simulation library.
+simulation library and CLI.
 
 ### v0.1 (released 2022-07-17)
 - General financial utility classes
@@ -71,7 +71,7 @@ simulation library.
 - Historical prediction accuracy analysis and adjustments
 
 ## Future Ideas
-In the more distant future, this project could include:
+In the future, this project could include:
 - A tax calculation GUI
 - A simulation GUI
 
