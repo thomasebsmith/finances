@@ -63,8 +63,8 @@ simulation library and CLI.
 
 ### v0.3
 - Detailed historical tax calculations
-- Financial simulations based on historical data
-- Simulation optimizations
+- Financial simulations based on historical market and inflation data
+- Simulation performance optimizations
 
 ### v0.4
 - Simulated financial predictions
