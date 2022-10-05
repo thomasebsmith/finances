@@ -61,7 +61,7 @@ simulation library and CLI.
 - Account abstraction (with ability to transfer among accounts and ability to
   store variable distributions)
 
-### v0.3
+### v0.3 (in planning stages)
 - Detailed historical tax calculations
 - Financial simulations based on historical market and inflation data
 - Simulation performance optimizations
