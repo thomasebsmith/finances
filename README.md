@@ -71,7 +71,7 @@ simulation library and CLI.
 - Historical prediction accuracy analysis and adjustments
 
 ## Future Ideas
-In the future, this project could include:
+In future versions after v0.4, this project could include:
 - A tax calculation GUI
 - A simulation GUI
 
