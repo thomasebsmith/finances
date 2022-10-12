@@ -1,5 +1,6 @@
 """Utility classes and functions that are not directly related to finances."""
-from typing import Protocol, TypeVar
+from dataclasses import dataclass
+from typing import Generic, Protocol, TypeVar
 
 
 # TODO(Python3.11): use Self instead of this
@@ -50,3 +51,23 @@ class Comparable(Protocol):
 
 class AddableComparable(Addable, Comparable, Protocol):
     """A type that is both Addable and Comparable."""
+
+
+_RangeT = TypeVar("_RangeT", bound=AddableComparable)
+
+
+@dataclass(frozen=True)
+class Range(Generic[_RangeT]):
+    """
+    Represents a range between two values.
+
+    Starts is inclusive, and end is exclusive.
+    """
+
+    start: _RangeT
+    end: _RangeT
+
+    def __post_init__(self) -> None:
+        """Checks that self.end >= self.start."""
+        if self.start > self.end:
+            raise ValueError(f"Start {self.start} is after end {self.end}")
