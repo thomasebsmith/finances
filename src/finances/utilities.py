@@ -53,19 +53,19 @@ class AddableComparable(Addable, Comparable, Protocol):
     """A type that is both Addable and Comparable."""
 
 
-_RangeT = TypeVar("_RangeT", bound=AddableComparable)
+_RangeT_co = TypeVar("_RangeT_co", bound=AddableComparable, covariant=True)
 
 
 @dataclass(frozen=True)
-class Range(Generic[_RangeT]):
+class Range(Generic[_RangeT_co]):
     """
     Represents a range between two values.
 
     Starts is inclusive, and end is exclusive.
     """
 
-    start: _RangeT
-    end: _RangeT
+    start: _RangeT_co
+    end: _RangeT_co
 
     def __post_init__(self) -> None:
         """Checks that self.end >= self.start."""
