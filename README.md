@@ -56,7 +56,7 @@ simulation library and CLI.
 
 ### v0.2 (in progress)
 - Basic financial simulations (inflation, investment returns, etc.)
-- Variable distributions
+- Probabilistic variable distributions
 - Confidence intervals based on variable distributions over time
 - Account abstraction (with ability to transfer among accounts and ability to
   store variable distributions)
