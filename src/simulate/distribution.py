@@ -43,3 +43,17 @@ class _SumDistribution(Distribution, Generic[_RangeT, _ValueT]):
 
     def average(self, in_range: Range[_RangeT]) -> _ValueT:
         return self._dist_1.average(in_range) + self._dist_2.average(in_range)
+
+
+@dataclass(eq=False, frozen=True)
+class _ProductDistribution(Distribution, Generic[_RangeT, _ValueT]):
+    """A product of a distribution and an integer."""
+
+    _dist: Distribution[_RangeT, _ValueT]
+    _multiplier: int
+
+    def value(self, at_point: _RangeT) -> _ValueT:
+        return self._dist.value(at_point) * self._multiplier
+
+    def average(self, in_range: Range[_RangeT]) -> _ValueT:
+        return self._dist.average(in_range) * self._multiplier
