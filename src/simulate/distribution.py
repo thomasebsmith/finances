@@ -30,6 +30,10 @@ class Distribution(Protocol, Generic[_RangeT, _ValueT]):
         """Returns the sum of this distribution and other."""
         return _SumDistribution(self, other)
 
+    def __mul__(self, multiplier: int) -> Distribution[_RangeT, _ValueT]:
+        """Returns the product of this distribution and multiplier."""
+        return _ProductDistribution(self, multiplier)
+
 
 @dataclass(eq=False, frozen=True)
 class _SumDistribution(Distribution, Generic[_RangeT, _ValueT]):
