@@ -1,4 +1,4 @@
-"""Types and functions for dealing with numeric distributions."""
+"""The Distribution protocol."""
 from __future__ import annotations
 
 from dataclasses import dataclass
