@@ -1,7 +1,7 @@
 """Classes and functions related to constant distributions."""
 
 from dataclasses import dataclass
-from typing import Generic, TypeVar
+from typing import TypeVar
 
 from finances import AddableComparable, Range
 
@@ -13,7 +13,7 @@ _ValueT = TypeVar("_ValueT", bound=AddableComparable)
 
 
 @dataclass(eq=False, frozen=True)
-class ConstantDistribution(Distribution, Generic[_RangeT, _ValueT]):
+class ConstantDistribution(Distribution[_RangeT, _ValueT]):
     """A distribution with a constant value at every point."""
 
     constant_value: _ValueT

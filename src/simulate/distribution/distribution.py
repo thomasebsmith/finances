@@ -36,7 +36,7 @@ class Distribution(Protocol, Generic[_RangeT, _ValueT]):
 
 
 @dataclass(eq=False, frozen=True)
-class _SumDistribution(Distribution, Generic[_RangeT, _ValueT]):
+class _SumDistribution(Distribution[_RangeT, _ValueT]):
     """A sum of two Distributions."""
 
     _dist_1: Distribution[_RangeT, _ValueT]
@@ -50,7 +50,7 @@ class _SumDistribution(Distribution, Generic[_RangeT, _ValueT]):
 
 
 @dataclass(eq=False, frozen=True)
-class _ProductDistribution(Distribution, Generic[_RangeT, _ValueT]):
+class _ProductDistribution(Distribution[_RangeT, _ValueT]):
     """A product of a distribution and an integer."""
 
     _dist: Distribution[_RangeT, _ValueT]
