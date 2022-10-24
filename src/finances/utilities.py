@@ -1,4 +1,6 @@
 """Utility classes and functions that are not directly related to finances."""
+from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import Generic, Protocol, TypeVar
 
@@ -53,21 +55,29 @@ class AddableComparable(Addable, Comparable, Protocol):
     """A type that is both Addable and Comparable."""
 
 
-_RangeT_co = TypeVar("_RangeT_co", bound=AddableComparable, covariant=True)
+_RangeT = TypeVar("_RangeT", bound=AddableComparable)
 
 
 @dataclass(frozen=True)
-class Range(Generic[_RangeT_co]):
+class Range(Generic[_RangeT]):
     """
     Represents a range between two values.
 
     Starts is inclusive, and end is exclusive.
     """
 
-    start: _RangeT_co
-    end: _RangeT_co
+    start: _RangeT
+    end: _RangeT
 
     def __post_init__(self) -> None:
         """Checks that self.end >= self.start."""
         if self.start > self.end:
             raise ValueError(f"Start {self.start} is after end {self.end}")
+
+    def contains(self, point: _RangeT) -> bool:
+        """Returns whether this range contains the given point."""
+        return self.start <= point < self.end
+
+    def surrounds(self, other: Range[_RangeT]) -> bool:
+        """Returns whether this range contains the entirety of other."""
+        return self.start <= other.start and self.end >= other.end
