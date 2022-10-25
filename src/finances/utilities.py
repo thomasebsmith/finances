@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Generic, Protocol, TypeVar
+from typing import Generic, Optional, Protocol, TypeVar
 
 
 # TODO(Python3.11): use Self instead of this
@@ -63,21 +63,39 @@ class Range(Generic[_RangeT]):
     """
     Represents a range between two values.
 
-    Starts is inclusive, and end is exclusive.
+    Start is inclusive, and end is exclusive.
+
+    If start or end is None, that bound does not apply.
     """
 
-    start: _RangeT
-    end: _RangeT
+    start: Optional[_RangeT]
+    end: Optional[_RangeT]
 
     def __post_init__(self) -> None:
         """Checks that self.end >= self.start."""
+        if self.start is None or self.end is None:
+            return
         if self.start > self.end:
             raise ValueError(f"Start {self.start} is after end {self.end}")
 
     def contains(self, point: _RangeT) -> bool:
         """Returns whether this range contains the given point."""
-        return self.start <= point < self.end
+        if self.start is not None and point < self.start:
+            return False
+        if self.end is not None and point >= self.end:
+            return False
+        return True
 
     def surrounds(self, other: Range[_RangeT]) -> bool:
         """Returns whether this range contains the entirety of other."""
-        return self.start <= other.start and self.end >= other.end
+        if self.start is not None:
+            if other.start is None:
+                return False
+            if other.start < self.start:
+                return False
+        if self.end is not None:
+            if other.end is None:
+                return False
+            if other.end > self.end:
+                return False
+        return True
