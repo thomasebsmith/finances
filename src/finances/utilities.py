@@ -99,3 +99,38 @@ class Range(Generic[_RangeT]):
             if other.end > self.end:
                 return False
         return True
+
+    def union(self, other: Range[_RangeT]) -> Range[_RangeT]:
+        """Returns the union of this range and other."""
+        if self.start is None or other.start is None:
+            start = None
+        else:
+            start = min(self.start, other.start)
+
+        if self.end is None or other.end is None:
+            end = None
+        else:
+            end = max(self.end, other.end)
+
+        return Range[_RangeT](start, end)
+
+    def intersection(self, other: Range[_RangeT]) -> Range[_RangeT]:
+        """Returns the intersection of this range and other."""
+        if self.start is None:
+            start = other.start
+        elif other.start is None:
+            start = self.start
+        else:
+            start = max(self.start, other.start)
+
+        if self.end is None:
+            end = other.end
+        elif other.end is None:
+            end = self.end
+        else:
+            end = min(self.end, other.end)
+
+        if start is not None and end is not None and start > end:
+            end = start
+
+        return Range[_RangeT](start, end)
