@@ -23,3 +23,6 @@ class ConstantDistribution(Distribution[_RangeT, _ValueT]):
 
     def average(self, in_range: Range[_RangeT]) -> _ValueT:
         return self.constant_value
+
+    def range(self) -> Range[_RangeT]:
+        return Range[_RangeT](None, None)

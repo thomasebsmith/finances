@@ -28,7 +28,6 @@ class Distribution(Protocol, Generic[_RangeT, _ValueT]):
 
     def range(self) -> Range[_RangeT]:
         """Returns the range of points that are in this distribution."""
-        return Range[_RangeT](None, None)
 
     def __add__(
         self, other: Distribution[_RangeT, _ValueT]
