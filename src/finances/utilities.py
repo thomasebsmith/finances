@@ -134,3 +134,9 @@ class Range(Generic[_RangeT]):
             end = start
 
         return Range[_RangeT](start, end)
+
+    @staticmethod
+    def _less(val1: Optional[_RangeT], val2: Optional[_RangeT]) -> bool:
+        if val2 is None:
+            return False
+        return val1 is None or val1 < val2
