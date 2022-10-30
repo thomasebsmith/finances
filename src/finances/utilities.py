@@ -80,11 +80,9 @@ class Range(Generic[_RangeT]):
 
     def contains(self, point: _RangeT) -> bool:
         """Returns whether this range contains the given point."""
-        if self.start is not None and point < self.start:
-            return False
-        if self.end is not None and point >= self.end:
-            return False
-        return True
+        return not Range._less(point, self.start) and Range._less(
+            point, self.end
+        )
 
     def surrounds(self, other: Range[_RangeT]) -> bool:
         """Returns whether this range contains the entirety of other."""
