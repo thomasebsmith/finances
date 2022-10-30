@@ -62,8 +62,9 @@ simulation library and CLI.
   store variable distributions)
 
 ### v0.3 (in planning stages)
-- Detailed historical tax calculations
-- Financial simulations based on historical market and inflation data
+- Detailed historical tax calculations (United States only)
+- Financial simulations based on historical market and inflation data (United
+  States only)
 - Simulation performance optimizations
 
 ### v0.4
