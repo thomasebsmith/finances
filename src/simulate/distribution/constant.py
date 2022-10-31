@@ -25,4 +25,4 @@ class ConstantDistribution(Distribution[_RangeT, _ValueT]):
         return self.constant_value
 
     def range(self) -> Range[_RangeT]:
-        return Range[_RangeT](None, None)
+        return Range[_RangeT](Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY)
