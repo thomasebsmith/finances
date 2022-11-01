@@ -109,6 +109,12 @@ class Range(Generic[_RangeT]):
             self.start, other.start
         ) and Range._less_than_or_equal(other.end, self.end)
 
+    def near(self, other: Range[_RangeT]) -> bool:
+        """Returns whether this range is adjacent to or overlaps with other."""
+        return Range._less_than_or_equal(
+            self.start, other.end
+        ) and Range._less_than_or_equal(other.start, self.end)
+
     def union(self, other: Range[_RangeT]) -> Range[_RangeT]:
         """Returns the union of this range and other."""
         start: Union[_RangeT, _NegInfT]
