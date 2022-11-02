@@ -63,6 +63,21 @@ class Distribution(Protocol, Generic[_RangeT, _ValueT]):
         else:  # key: _RangeT
             return self.value(at_point=key)
 
+    def defaulting_to(
+        self, other: Distribution[_RangeT, _ValueT]
+    ) -> Distribution[_RangeT, _ValueT]:
+        """
+        Returns a distribution defaulting to the values in other.
+
+        The values at points outside of this distribution's range default to the
+        values at the corresponding points in other.
+        """
+        return _DefaultingDistribution(
+            self,
+            other,
+            self.range().union(other.range()),
+        )
+
 
 @dataclass(eq=False, frozen=True)
 class _SumDistribution(Distribution[_RangeT, _ValueT]):
@@ -129,6 +144,34 @@ class _SubsetDistribution(Distribution[_RangeT, _ValueT]):
                 f" {self._range}"
             )
         return self._dist.average(in_range)
+
+    def range(self) -> Range[_RangeT]:
+        return self._range
+
+
+@dataclass(eq=False, frozen=True)
+class _DefaultingDistribution(Distribution[_RangeT, _ValueT]):
+    """A distribution that defaults to another one as a backup."""
+
+    _primary: Distribution[_RangeT, _ValueT]
+    _backup: Distribution[_RangeT, _ValueT]
+    _range: Range[_RangeT]
+
+    def __post_init__(self) -> None:
+        """Checks that self._primary and self._backup are near each other."""
+        if not self._primary.range().near(self._backup.range()):
+            raise ValueError(
+                f"Primary distribution range {self._primary.range()} is not "
+                f"near backup distribution range {self._backup.range()}"
+            )
+
+    def value(self, at_point: _RangeT) -> _ValueT:
+        if not self._primary.range().contains(at_point):
+            return self._backup.value(at_point)
+        return self._primary.value(at_point)
+
+    def average(self, in_range: Range[_RangeT]) -> _ValueT:
+        raise NotImplementedError()
 
     def range(self) -> Range[_RangeT]:
         return self._range
