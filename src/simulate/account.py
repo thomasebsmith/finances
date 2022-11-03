@@ -5,14 +5,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable, Generic, TypeVar
 
-from finances.utilities import AddableComparable
+from finances.utilities import Growable
 
 
-AddableComparableT = TypeVar("AddableComparableT", bound=AddableComparable)
+GrowableT = TypeVar("GrowableT", bound=Growable)
 
 
 @dataclass(frozen=False, order=True)
-class Account(Generic[AddableComparableT]):
+class Account(Generic[GrowableT]):
     """
     Represents a financial account.
 
@@ -22,41 +22,37 @@ class Account(Generic[AddableComparableT]):
     Example: my_account = Account[Money](Money.of(314, 15))
     """
 
-    _balance: AddableComparableT
+    _balance: GrowableT
 
-    def balance(self) -> AddableComparableT:
+    def balance(self) -> GrowableT:
         """Retrieves the current account balance."""
         return self._balance
 
-    def __iadd__(
-        self, other: AddableComparableT
-    ) -> Account[AddableComparableT]:
+    def __iadd__(self, other: GrowableT) -> Account[GrowableT]:
         """Adds other to this account's balance."""
         self._balance += other
         return self
 
-    def __isub__(
-        self, other: AddableComparableT
-    ) -> Account[AddableComparableT]:
+    def __isub__(self, other: GrowableT) -> Account[GrowableT]:
         """Subtracts other from this account's balance."""
         self._balance -= other
         return self
 
-    def __imul__(self, other: int) -> Account[AddableComparableT]:
+    def __imul__(self, other: int) -> Account[GrowableT]:
         """Multiplies this account's balance by an integer."""
         self._balance *= other
         return self
 
-    def grow_and_round(self, ratio: float) -> Account[AddableComparableT]:
+    def grow_and_round(self, ratio: float) -> Account[GrowableT]:
         """Multiply's this account's balance by ratio, rounding."""
         self._balance = self._balance.grow_and_round(ratio)
         return self
 
     def transfer(
         self,
-        amount: AddableComparableT,
-        to_account: Account[AddableComparableT],
-    ) -> Account[AddableComparableT]:
+        amount: GrowableT,
+        to_account: Account[GrowableT],
+    ) -> Account[GrowableT]:
         """
         Transfers an amount of this account's balance to another account.
 
@@ -73,8 +69,8 @@ class Account(Generic[AddableComparableT]):
 
     def apply(
         self,
-        balance_modifier: Callable[[AddableComparableT], AddableComparableT],
-    ) -> Account[AddableComparableT]:
+        balance_modifier: Callable[[GrowableT], GrowableT],
+    ) -> Account[GrowableT]:
         """
         Applies balance_modifier to this account's balance.
 

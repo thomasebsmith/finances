@@ -3,6 +3,6 @@
 from .metadata import VERSION as __version__
 from .earnings import Earnings, EarningsTaxPolicy, TaxCategory
 from .money import Money
-from .utilities import Addable, AddableComparable, Comparable, Range
+from .utilities import Addable, AddableComparable, Comparable, Growable, Range
 from .value import Value
 from . import tax

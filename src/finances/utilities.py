@@ -26,9 +26,6 @@ class Addable(Protocol):
     def __mul__(self: AddableT, other: int) -> AddableT:
         """Multiplies this instance by other."""
 
-    def grow_and_round(self: AddableT, ratio: float) -> AddableT:
-        """Multiplies this instance by ratio, rounding."""
-
 
 ComparableT = TypeVar("ComparableT", bound="Comparable")
 
@@ -56,7 +53,17 @@ class AddableComparable(Addable, Comparable, Protocol):
     """A type that is both Addable and Comparable."""
 
 
-_RangeT = TypeVar("_RangeT", bound=AddableComparable)
+GrowableT = TypeVar("GrowableT", bound="Growable")
+
+
+class Growable(AddableComparable, Protocol):
+    """A custom type that can be multiplied by a ratio."""
+
+    def grow_and_round(self: GrowableT, ratio: float) -> GrowableT:
+        """Multiplies this instance by ratio, rounding."""
+
+
+_RangeT = TypeVar("_RangeT", bound=Comparable)
 
 
 class _NegInfT(Enum):
