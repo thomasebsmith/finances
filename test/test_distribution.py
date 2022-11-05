@@ -19,3 +19,18 @@ def test_constant_distribution() -> None:
     assert dist.range() == Range[int](
         Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY
     )
+
+
+def test_add() -> None:
+    """Tests the behavior of Distribution.__add__."""
+    dist1 = ConstantDistribution[int, int](-99)
+    dist2 = ConstantDistribution[int, int](101)
+    dist = dist1 + dist2
+    assert dist.value(0) == 2
+    assert dist.value(31415) == 2
+    assert dist.value(-628) == 2
+    assert dist.average(Range(-100, -3)) == 2
+    assert dist.average(Range(0, Range.POSITIVE_INFINITY)) == 2
+    assert dist.range() == Range[int](
+        Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY
+    )
