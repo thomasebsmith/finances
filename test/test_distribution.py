@@ -34,3 +34,18 @@ def test_add() -> None:
     assert dist.range() == Range[int](
         Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY
     )
+
+
+def test_mul() -> None:
+    """Test the behavior of Distribution.__mul__."""
+    dist = ConstantDistribution[int, int](-50)
+    multiplied = dist * 7
+    assert multiplied.value(-2) == -350
+    assert multiplied.value(33333) == -350
+    assert multiplied.value(987665) == -350
+    assert multiplied.average(Range(500, 501)) == -350
+    assert multiplied.average(Range(Range.NEGATIVE_INFINITY, -1)) == -350
+    assert multiplied.range() == Range[int](
+        Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY
+    )
+
