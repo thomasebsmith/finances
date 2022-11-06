@@ -48,4 +48,3 @@ def test_mul() -> None:
     assert multiplied.range() == Range[int](
         Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY
     )
-
