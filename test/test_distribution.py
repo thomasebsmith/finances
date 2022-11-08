@@ -8,7 +8,7 @@ def test_constant_distribution() -> None:
     """Tests the behavior of ConstantDistribution."""
     dist = ConstantDistribution[int, float](3.14159)
     assert dist.value(-3) == 3.14159
-    assert dist.value(9999999) == 3.14159
+    assert dist[9999999] == 3.14159
     assert dist.value(0) == 3.14159
     assert dist.average(Range(-1, 1)) == 3.14159
     assert (
@@ -26,9 +26,9 @@ def test_add() -> None:
     dist1 = ConstantDistribution[int, int](-99)
     dist2 = ConstantDistribution[int, int](101)
     dist = dist1 + dist2
-    assert dist.value(0) == 2
+    assert dist[0] == 2
     assert dist.value(31415) == 2
-    assert dist.value(-628) == 2
+    assert dist[-628] == 2
     assert dist.average(Range(-100, -3)) == 2
     assert dist.average(Range(0, Range.POSITIVE_INFINITY)) == 2
     assert dist.range() == Range[int](
@@ -42,7 +42,7 @@ def test_mul() -> None:
     multiplied = dist * 7
     assert multiplied.value(-2) == -350
     assert multiplied.value(33333) == -350
-    assert multiplied.value(987665) == -350
+    assert multiplied[987665] == -350
     assert multiplied.average(Range(500, 501)) == -350
     assert multiplied.average(Range(Range.NEGATIVE_INFINITY, -1)) == -350
     assert multiplied.range() == Range[int](
