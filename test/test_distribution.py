@@ -37,7 +37,7 @@ def test_add() -> None:
 
 
 def test_mul() -> None:
-    """Test the behavior of Distribution.__mul__."""
+    """Tests the behavior of Distribution.__mul__."""
     dist = ConstantDistribution[int, int](-50)
     multiplied = dist * 7
     assert multiplied.value(-2) == -350
@@ -48,3 +48,15 @@ def test_mul() -> None:
     assert multiplied.range() == Range[int](
         Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY
     )
+
+
+def test_subset() -> None:
+    """Tests the behavior of Distribution.__getitem__(Range)."""
+    dist = ConstantDistribution[float, int](26)
+    subset = dist[Range(-100.5, 67.8)]
+    assert subset.value(-100.5) == 26
+    assert subset.value(67.7999) == 26
+    assert subset[1.0] == 26
+    assert subset.average(Range(-100.5, 67.8)) == 26
+    assert subset.average(Range(64.1, 64.8)) == 26
+    assert subset.range() == Range(-100.5, 67.8)
