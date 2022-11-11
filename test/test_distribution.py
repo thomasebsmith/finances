@@ -62,6 +62,20 @@ def test_subset() -> None:
     assert subset.range() == Range(-100.5, 67.8)
 
 
+def test_defaulting_to() -> None:
+    """Tests Distribution.defaulting_to."""
+    dist = ConstantDistribution[int, int](0)
+    subset = dist[Range(-15, -10)]
+    defaulting = subset.defaulting_to(ConstantDistribution[int, int](5))
+    assert defaulting.value(-15) == 0
+    assert defaulting[-13] == 0
+    assert defaulting[-10] == 5
+    assert defaulting.value(300) == 5
+    assert defaulting.range() == Range[int](
+        Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY
+    )
+
+
 def test_combinations() -> None:
     """Tests the combined behavior of Distribution methods."""
     dist = ConstantDistribution[float, int](314159)
