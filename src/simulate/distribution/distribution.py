@@ -171,6 +171,7 @@ class _DefaultingDistribution(Distribution[_RangeT, _ValueT]):
         return self._primary.value(at_point)
 
     def average(self, in_range: Range[_RangeT]) -> _ValueT:
+        # In the future: Take average of parts in each distribution's range
         raise NotImplementedError()
 
     def range(self) -> Range[_RangeT]:
