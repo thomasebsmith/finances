@@ -171,7 +171,11 @@ class _DefaultingDistribution(Distribution[_RangeT, _ValueT]):
         return self._primary.value(at_point)
 
     def average(self, in_range: Range[_RangeT]) -> _ValueT:
-        # In the future: Take average of parts in each distribution's range
+        # To implement: raise exception if not in range
+        if self._primary.range().surrounds(in_range):
+            return self._primary.average(in_range)
+        elif not self._primary.range().near(in_range):
+            return self._backup.average(in_range)
         raise NotImplementedError()
 
     def range(self) -> Range[_RangeT]:
