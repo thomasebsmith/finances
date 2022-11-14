@@ -80,10 +80,14 @@ def test_combinations() -> None:
     """Tests the combined behavior of Distribution methods."""
     dist = ConstantDistribution[float, int](314159)
     dist2 = ConstantDistribution[float, int](-105000)
-    combo = dist + dist2[Range(3.14, 6.28)] * 2
+    dist3 = ConstantDistribution[float, int](987)
+    combo = (dist + dist2[Range(3.14, 6.28)] * 2).defaulting_to(dist3)[
+        Range(2.718, 6.28)
+    ]
     assert combo.value(3.14) == 104159
     assert combo.value(6.27) == 104159
     assert combo[4.0] == 104159
     assert combo.average(Range(3.14, 6.28)) == 104159
     assert combo.average(Range(4.0, 5.0)) == 104159
-    assert combo.range() == Range(3.14, 6.28)
+    assert combo.range() == Range(2.718, 6.28)
+    assert combo[2.85] == 987
