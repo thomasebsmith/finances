@@ -171,7 +171,11 @@ class _DefaultingDistribution(Distribution[_RangeT, _ValueT]):
         return self._primary.value(at_point)
 
     def average(self, in_range: Range[_RangeT]) -> _ValueT:
-        # To implement: raise exception if not in range
+        if not self._range.surrounds(in_range):
+            raise SimulationInternalError(
+                f"{in_range} is out of range for defaulting distribution with"
+                f" range {self._range}"
+            )
         if self._primary.range().surrounds(in_range):
             return self._primary.average(in_range)
         elif not self._primary.range().near(in_range):
