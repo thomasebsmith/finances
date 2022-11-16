@@ -76,6 +76,7 @@ simulation library and CLI.
 In future versions after v0.4, this project could include:
 - A tax calculation GUI
 - A simulation GUI
+- An optimizer for desired financial outcomes
 
 ## License
 This library is released under the MIT License. See [LICENSE](./LICENSE) for
