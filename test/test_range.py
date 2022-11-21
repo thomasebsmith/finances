@@ -36,3 +36,25 @@ def test_create_exception() -> None:
         Range(8888888, 0)
     with raises(ValueError):
         Range(Money.of(32, 7), Money.of(3, 28))
+
+
+def test_surrounds() -> None:
+    """Tests the behavior of Range.surrounds."""
+    assert Range(5, 5).surrounds(Range(5, 5))
+    assert not Range(Money.of(-1), Money.of(-1)).surrounds(
+        Range(Money.of(-1), Money.of(0))
+    )
+    assert Range(8.2, 9.3).surrounds(Range(8.2, 9.2))
+    assert Range(10, 20).surrounds(Range(15, 20))
+    assert Range(Range.NEGATIVE_INFINITY, 0).surrounds(Range(-5, -3))
+    assert Range(20, Range.POSITIVE_INFINITY).surrounds(Range(20, 25))
+    assert not Range(Range.NEGATIVE_INFINITY, 99).surrounds(Range(98, 100))
+    assert not Range(0, Range.POSITIVE_INFINITY).surrounds(
+        Range(Range.NEGATIVE_INFINITY, 0)
+    )
+    assert Range(Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY).surrounds(
+        Range(Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY)
+    )
+    assert Range[int](
+        Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY
+    ).surrounds(Range(-99, 109))
