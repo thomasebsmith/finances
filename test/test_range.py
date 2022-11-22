@@ -38,6 +38,34 @@ def test_create_exception() -> None:
         Range(Money.of(32, 7), Money.of(3, 28))
 
 
+def test_contains() -> None:
+    """Tests the behavior of Range.contains."""
+    assert Range(0, 1).contains(0)
+    assert not Range(0, 1).contains(1)
+    assert not Range(0, 1).contains(-1)
+    assert not Range(0, 0).contains(0)
+    assert not Range(0, 0).contains(5)
+    assert Range(Range.NEGATIVE_INFINITY, 0).contains(-5)
+    assert not Range(Range.NEGATIVE_INFINITY, 0).contains(0)
+    assert not Range(Range.NEGATIVE_INFINITY, 0).contains(5)
+    assert Range(-1, Range.POSITIVE_INFINITY).contains(-1)
+    assert Range(-1, Range.POSITIVE_INFINITY).contains(987)
+    assert not Range(-1, Range.POSITIVE_INFINITY).contains(-2)
+    assert Range[int](
+        Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY
+    ).contains(-100)
+    assert Range[int](
+        Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY
+    ).contains(0)
+    assert Range[int](
+        Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY
+    ).contains(987)
+    assert Range(Money.of(31, 41), Money.of(159, 26)).contains(Money.of(62, 83))
+    assert not Range(Money.of(31, 41), Money.of(159, 26)).contains(
+        Money.of(2997924, 58)
+    )
+
+
 def test_surrounds() -> None:
     """Tests the behavior of Range.surrounds."""
     assert Range(5, 5).surrounds(Range(5, 5))
