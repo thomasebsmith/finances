@@ -86,3 +86,67 @@ def test_surrounds() -> None:
     assert Range[int](
         Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY
     ).surrounds(Range(-99, 109))
+
+
+def test_near() -> None:
+    """Tests the behavior of Range.near."""
+
+    def expect_near(range1: Range[int], range2: Range[int]) -> None:
+        assert range1.near(range2)
+        assert range2.near(range1)
+
+    def expect_not_near(range1: Range[int], range2: Range[int]) -> None:
+        assert not range1.near(range2)
+        assert not range2.near(range1)
+
+    expect_near(Range(0, 0), Range(0, 0))
+    expect_near(Range(0, 0), Range(0, 5))
+    expect_near(Range(0, 0), Range(-5, 0))
+    expect_not_near(Range(0, 0), Range(1, 1))
+    expect_not_near(Range(0, 0), Range(1, 5))
+    expect_not_near(Range(0, 0), Range(-5, -1))
+
+    expect_near(Range(1, 3), Range(2, 4))
+    expect_near(Range(1, 4), Range(-1, 3))
+    expect_near(Range(2, 5), Range(1, 5))
+    expect_near(Range(2, 5), Range(1, 6))
+    expect_near(Range(2, 5), Range(2, 6))
+
+    expect_near(
+        Range(Range.NEGATIVE_INFINITY, 0),
+        Range(0, Range.POSITIVE_INFINITY),
+    )
+    expect_near(
+        Range(Range.NEGATIVE_INFINITY, 0),
+        Range(0, 5),
+    )
+    expect_near(
+        Range(Range.NEGATIVE_INFINITY, 0),
+        Range(-1, 0),
+    )
+    expect_near(
+        Range(Range.NEGATIVE_INFINITY, 0),
+        Range(-1, -1),
+    )
+    expect_near(
+        Range(Range.NEGATIVE_INFINITY, 0),
+        Range(-5, -3),
+    )
+    expect_not_near(
+        Range(Range.NEGATIVE_INFINITY, 0),
+        Range(1, 5),
+    )
+    expect_near(
+        Range(5, Range.POSITIVE_INFINITY),
+        Range(1, 6),
+    )
+    expect_near(
+        Range(5, Range.POSITIVE_INFINITY),
+        Range(8, Range.POSITIVE_INFINITY),
+    )
+    expect_near(
+        Range(5, Range.POSITIVE_INFINITY),
+        Range(8, Range.POSITIVE_INFINITY),
+    )
+    expect_near(Range(5, Range.POSITIVE_INFINITY), Range(0, 5))
+    expect_not_near(Range(5, Range.POSITIVE_INFINITY), Range(-88, -88))
