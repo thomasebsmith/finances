@@ -150,3 +150,29 @@ def test_near() -> None:
     )
     expect_near(Range(5, Range.POSITIVE_INFINITY), Range(0, 5))
     expect_not_near(Range(5, Range.POSITIVE_INFINITY), Range(-88, -88))
+
+
+def test_union() -> None:
+    """Test the behavior of Range.union."""
+
+    def expect_union(
+        range1: Range[int], range2: Range[int], to_be: Range[int]
+    ) -> None:
+        assert range1.union(range2) == to_be
+        assert range2.union(range1) == to_be
+
+    expect_union(Range(0, 0), Range(-5, 5), to_be=Range(-5, 5))
+    expect_union(Range(-1, 3), Range(3, 8), to_be=Range(-1, 8))
+    expect_union(
+        Range(Range.NEGATIVE_INFINITY, -9),
+        Range(-5, Range.POSITIVE_INFINITY),
+        to_be=Range(Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY),
+    )
+    expect_union(Range(-1, 3), Range(5, 8), to_be=Range(-1, 8))
+    expect_union(Range(3, 3), Range(5, 5), to_be=Range(3, 5))
+    expect_union(
+        Range(Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY),
+        Range(888, 999),
+        to_be=Range(Range.NEGATIVE_INFINITY, Range.POSITIVE_INFINITY),
+    )
+    expect_union(Range(1, 5), Range(1, 5), to_be=Range(1, 5))
