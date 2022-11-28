@@ -78,6 +78,7 @@ In future versions after v0.4, this project could include:
 - A simulation GUI (including visualizations of possible outcomes, confidence
   intervals, etc.)
 - An optimizer for desired financial outcomes
+- Simulation data and tax calculations for locations outside the United States
 
 ## License
 This library is released under the MIT License. See [LICENSE](./LICENSE) for
