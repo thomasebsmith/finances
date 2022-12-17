@@ -55,6 +55,7 @@ simulation library and CLI.
 - Basic testing and linting
 
 ### v0.2 (in progress)
+- Correct use of tax terminology (AGI vs MAGI vs taxable income) in API
 - Basic financial simulations (inflation, investment returns, etc.)
 - Probabilistic variable ranges and distributions
 - Confidence intervals based on variable distributions over time
