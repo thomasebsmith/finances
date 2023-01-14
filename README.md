@@ -89,4 +89,4 @@ This library is released under the MIT License. See [LICENSE](./LICENSE) for
 details.
 
 ## Copyright
-This project was created by Thomas Smith and is copyright © 2022 Thomas Smith.
+This project was created by Thomas Smith and is copyright © 2022-2023 Thomas Smith.
