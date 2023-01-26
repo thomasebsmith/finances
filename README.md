@@ -83,6 +83,8 @@ In future versions after v0.4, this project could include:
   intervals, etc.)
 - An optimizer for desired financial outcomes
 - Simulation data and tax calculations for locations outside the United States
+- Data about other types of investment assets (commodities, real estate,
+  derivatives, etc.)
 
 ## License
 This library is released under the MIT License. See [LICENSE](./LICENSE) for
