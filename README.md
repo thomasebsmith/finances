@@ -7,8 +7,8 @@ and simulating finances. It is designed for dealing with United States financial
 law. It includes tax estimation functionality and is being extended to include
 financial simulation functionality.
 
-Note that this project's API and CLI currently misuse the terms "AGI" and
-"MAGI." This is in the process of being fixed.
+**Note that this project's API and CLI currently misuse the terms "AGI" and
+"MAGI." This is in the process of being fixed.**
 
 ## Prerequisites
 You will need:
