@@ -1,4 +1,4 @@
-black==22.3.0
-mypy==0.942
-pylint==2.13.5
+black==23.1.0
+mypy==1.0.0
+pylint==2.16.1
 -r requirements-test.txt # To lint the tests
