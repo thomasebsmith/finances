@@ -87,7 +87,7 @@ In future versions after v0.4, this project could include:
   derivatives, etc.) integrated into the predictor and optimizer
 
 ## License
-This library is released under the MIT License. See [LICENSE](./LICENSE) for
+This library is licensed under the MIT License. See [LICENSE](./LICENSE) for
 details.
 
 ## Copyright
