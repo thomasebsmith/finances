@@ -8,7 +8,8 @@ law. It includes tax estimation functionality and is being extended to include
 financial simulation functionality.
 
 **Note that this project's API and CLI currently misuse the terms "AGI" and
-"MAGI." This is in the process of being fixed.**
+"MAGI." Specifically, they exclude all deductions from the AGI, which is
+incorrect. This is in the process of being fixed.**
 
 ## Prerequisites
 You will need:
