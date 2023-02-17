@@ -40,6 +40,8 @@ TAX_POLICY_3 = EarningsTaxPolicy(
 
 def test_agi() -> None:
     """Tests the behavior of Earnings.agi."""
+    # Note: This test is incorrect. It does not correctly distinguish between
+    # deductions from gross income and deductions from AGI.
     assert EARNINGS_1.agi(TaxCategory.FEDERAL) == Money.of(91000)
     assert EARNINGS_1.agi(TaxCategory.STATE) == Money.of(92000)
     assert EARNINGS_1.agi(TaxCategory.LOCAL) == Money.of(93000)
@@ -47,6 +49,8 @@ def test_agi() -> None:
 
 def test_magi() -> None:
     """Tests the behavior of Earnings.magi."""
+    # Note: This test is incorrect. It does not correctly distinguish between
+    # deductions from gross income and deductions from AGI.
     assert EARNINGS_1.magi(TaxCategory.FEDERAL) == Money.of(91100)
     assert EARNINGS_1.magi(TaxCategory.STATE) == Money.of(92200)
     assert EARNINGS_1.magi(TaxCategory.LOCAL) == Money.of(93300)
