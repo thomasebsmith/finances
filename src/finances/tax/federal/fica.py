@@ -1,6 +1,6 @@
 """Contains classes and utilities related to FICA taxes."""
 
-from ...earnings import EarningsTaxPolicy, TaxCategory
+from ...earnings import EarningsTaxPolicy, EarningsType, TaxCategory
 from ...money import Money
 from ..composite import CompositeTax
 from ..bracket import Bracket, BracketTax
@@ -32,7 +32,7 @@ class SocialSecurityTax(FlatTax):
         super().__init__(
             SOCIAL_SECURITY_TAX_RATE,
             EarningsTaxPolicy(
-                allow_deductions=False,
+                earnings_type=EarningsType.GROSS_INCOME,
                 category=TaxCategory.FEDERAL,
                 ceiling=WAGE_BASE_LIMIT_BY_YEAR[year],
             ),
@@ -66,7 +66,8 @@ class MedicareTax(BracketTax):
                 Bracket(MEDICARE_TAX_RATE, Money.of(0)),
             ],
             policy=EarningsTaxPolicy(
-                allow_deductions=False, category=TaxCategory.FEDERAL
+                earnings_type=EarningsType.GROSS_INCOME,
+                category=TaxCategory.FEDERAL,
             ),
         )
 

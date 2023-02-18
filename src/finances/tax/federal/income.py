@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from ...earnings import EarningsTaxPolicy, TaxCategory
+from ...earnings import EarningsTaxPolicy, EarningsType, TaxCategory
 from ...money import Money
 from ..bracket import Bracket, BracketTax
 from .status import FilingStatus
@@ -120,6 +120,7 @@ class FederalIncomeTax(BracketTax):
         super().__init__(
             BRACKETS_BY_YEAR[year][filing_status],
             policy=EarningsTaxPolicy(
-                allow_deductions=True, category=TaxCategory.FEDERAL
+                earnings_type=EarningsType.AGI_WITH_DEDUCTIONS,
+                category=TaxCategory.FEDERAL,
             ),
         )

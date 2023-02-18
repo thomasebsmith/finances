@@ -1,6 +1,6 @@
 """Classes and utilities related to Michigan state income tax."""
 
-from ....earnings import EarningsTaxPolicy, TaxCategory
+from ....earnings import EarningsTaxPolicy, EarningsType, TaxCategory
 from ...flat import FlatTax
 from .data import MICHIGAN_INCOME_TAX_RATE, MICHIGAN_TAX_DATA_YEARS
 
@@ -21,6 +21,7 @@ class MichiganIncomeTax(FlatTax):
         super().__init__(
             rate=MICHIGAN_INCOME_TAX_RATE,
             policy=EarningsTaxPolicy(
-                allow_deductions=True, category=TaxCategory.STATE
+                earnings_type=EarningsType.AGI_WITH_DEDUCTIONS,
+                category=TaxCategory.STATE,
             ),
         )

@@ -17,11 +17,20 @@ class TaxCategory(Enum):
     LOCAL = auto()
 
 
+class EarningsType(Enum):
+    """A type of earnings with certain deductions or adjustments applied."""
+
+    GROSS_INCOME = auto()
+    MAGI = auto()
+    AGI = auto()
+    AGI_WITH_DEDUCTIONS = auto()
+
+
 @dataclass(frozen=True)
 class EarningsTaxPolicy:
     """A specification of to which earnings a tax applies."""
 
-    allow_deductions: bool
+    earnings_type: EarningsType
     category: TaxCategory
     floor: Optional[Money] = None
     ceiling: Optional[Money] = None
@@ -36,6 +45,7 @@ class Earnings:
     """Information about an individual's taxable earnings for the year."""
 
     gross_income: Money
+    adjustments: dict[TaxCategory, Money]
     deductions: dict[TaxCategory, Money]
     magi_additions: dict[TaxCategory, Money]
 
@@ -47,11 +57,7 @@ class Earnings:
             policy - A tax policy to use to determine which earnings are taxable
         Return value: The amount of taxable income
         """
-        income = (
-            self.agi(policy.category)
-            if policy.allow_deductions
-            else self.gross_income
-        )
+        income = self.of_type(policy.category, policy.earnings_type)
 
         if policy.floor is not None:
             income = max(policy.floor, income)
@@ -60,16 +66,49 @@ class Earnings:
 
         return income
 
+    def of_type(
+        self,
+        category: TaxCategory,
+        earnings_type: EarningsType,
+    ) -> Money:
+        """
+        Calculates the amount of earnings of the specified type.
+
+        Arguments:
+            category - The category to use to determine deductions, etc.
+            earnings_type - The type of earnings to retrieve
+        Return value: The earnings of the specified type
+        """
+        if earnings_type is EarningsType.GROSS_INCOME:
+            return self.gross_income
+        elif earnings_type is EarningsType.MAGI:
+            return self.magi(category)
+        elif earnings_type is EarningsType.AGI:
+            return self.agi(category)
+        else:
+            return self.agi_with_deductions(category)
+
+    def agi_with_deductions(self, category: TaxCategory) -> Money:
+        """
+        Calculates the AGI minus any deductions.
+
+        Arguments:
+            category - The category to use to determine deductions, etc.
+        Return value: The AGI minus deductions
+        """
+        assert category in self.deductions, f"no deductions for {category}"
+        return self.agi(category) - self.deductions[category]
+
     def agi(self, category: TaxCategory) -> Money:
         """
         Calculates the adjusted gross income of these earnings for category.
 
         Arguments:
-            category - The category to use to determine deductions, etc.
+            category - The category to use to determine adjustments, etc.
         Return value: The AGI
         """
-        assert category in self.deductions, f"no deductions for {category}"
-        return self.gross_income - self.deductions[category]
+        assert category in self.adjustments, f"no adjustments for {category}"
+        return self.gross_income - self.adjustments[category]
 
     def magi(self, category: TaxCategory) -> Money:
         """

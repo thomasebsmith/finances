@@ -13,6 +13,7 @@ from .tax.state.mi import MichiganIncomeTax
 def print_taxes(
     gross_income: Money,
     year: int,
+    adjustments: Money,
     deductions: Money,
     personal_exemption: Money,
 ) -> None:
@@ -25,6 +26,7 @@ def print_taxes(
     Arguments:
         gross_income - The person's gross income for the year.
         year - The tax year.
+        adjustments - The adjustments for the year.
         deductions - The deductions for the year.
         personal_exemption - The Michigan personal exemption for the year.
     """
@@ -33,6 +35,10 @@ def print_taxes(
     fica = FICATax(year, FilingStatus.SINGLE)
     income = Earnings(
         gross_income=gross_income,
+        adjustments={
+            TaxCategory.FEDERAL: adjustments,
+            TaxCategory.STATE: adjustments,
+        },
         deductions={
             TaxCategory.FEDERAL: deductions,
             TaxCategory.STATE: personal_exemption,
@@ -54,14 +60,23 @@ def print_taxes(
 
 
 def main() -> int:
-    """Prints the amount of federal taxes on $100,000 in 2021 and 2022."""
+    """Prints the amount of federal taxes on some money in 2021 and 2022."""
     gross_income = Money.parse(input("Gross income: "))
+    adjustments = Money.parse(input("Adjustments: "))
     deductions = Money.parse(input("Itemized deductions: "))
     print_taxes(
-        gross_income, 2021, max(deductions, Money.of(12550)), Money.of(4900)
+        gross_income,
+        2021,
+        adjustments,
+        max(deductions, Money.of(12550)),
+        Money.of(4900),
     )
     print_taxes(
-        gross_income, 2022, max(deductions, Money.of(12950)), Money.of(5000)
+        gross_income,
+        2022,
+        adjustments,
+        max(deductions, Money.of(12950)),
+        Money.of(5000),
     )
     return 0
 
