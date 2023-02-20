@@ -48,6 +48,17 @@ TAX_POLICY_3 = EarningsTaxPolicy(
     ceiling=Money.of(200000),
 )
 
+TAX_POLICY_4 = EarningsTaxPolicy(
+    earnings_type=EarningsType.GROSS_INCOME,
+    category=TaxCategory.FEDERAL,
+    ceiling=Money.of(99999),
+)
+
+TAX_POLICY_5 = EarningsTaxPolicy(
+    earnings_type=EarningsType.MAGI,
+    category=TaxCategory.STATE,
+)
+
 
 def test_agi() -> None:
     """Tests the behavior of Earnings.agi."""
@@ -68,3 +79,5 @@ def test_taxable_income() -> None:
     assert EARNINGS_1.taxable_income(TAX_POLICY_1) == Money.of(99900)
     assert EARNINGS_1.taxable_income(TAX_POLICY_2) == Money.of(92500)
     assert EARNINGS_1.taxable_income(TAX_POLICY_3) == Money.of(92700)
+    assert EARNINGS_1.taxable_income(TAX_POLICY_4) == Money.of(99999)
+    assert EARNINGS_1.taxable_income(TAX_POLICY_5) == Money.of(99820)
