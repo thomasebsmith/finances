@@ -62,7 +62,7 @@ simulation library and CLI.
 - Confidence intervals based on variable distributions over time
 - Account abstraction (with ability to transfer among accounts and ability to
   store variable distributions)
-- Thorough unit testing
+- Thorough unit testing of basic types and simulations
 
 ### v0.3 (in planning stages)
 - Detailed historical tax calculations (United States only)
