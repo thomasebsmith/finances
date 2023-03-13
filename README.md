@@ -84,6 +84,11 @@ In future versions after v0.4, this project could include:
 - Data about other types of investment assets (commodities, real estate,
   derivatives, etc.) integrated into the predictor and optimizer
 
+## Contributing
+To contribute to this project, please open an issue if one does not exist for
+your desired feature or bug fix. Then, feel free to comment that you are working
+on that issue and create a corresponding PR.
+
 ## License
 This library is licensed under the MIT License. See [LICENSE](./LICENSE) for
 details.
