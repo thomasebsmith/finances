@@ -87,7 +87,8 @@ In future versions after v0.4, this project could include:
 ## Contributing
 To contribute to this project, please open an issue if one does not exist for
 your desired feature or bug fix. Then, feel free to comment that you are working
-on that issue and create a corresponding PR.
+on that issue and create a corresponding PR. Your PR will be reviewed and
+hopefully approved for merge when it is ready.
 
 ## License
 This library is licensed under the MIT License. See [LICENSE](./LICENSE) for
