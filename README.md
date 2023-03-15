@@ -91,8 +91,8 @@ on that issue and create a corresponding PR. Your PR will be reviewed and
 hopefully approved for merge when it is ready.
 
 ## License
-This library is licensed under the MIT License. See [LICENSE](./LICENSE) for
-details.
+This project is licensed as open source software under the MIT License. See
+[LICENSE](./LICENSE) for details.
 
 ## Copyright
 This project was created by Thomas Smith and is copyright © 2022-2023 Thomas Smith.
