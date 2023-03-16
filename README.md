@@ -10,9 +10,9 @@ extended to include financial simulation functionality.
 ## Prerequisites
 You will need:
 - Git (to clone this repository)
-- Python >= 3.8 (to use this library)
-- Python support for virtual environments (to run scripts)
-- POSIX-compatible sh (to run scripts)
+- Python >= 3.8 (to use this library and CLI)
+- Python support for virtual environments (to run the provided scripts)
+- POSIX-compatible sh (to run the provided scripts)
 
 ## Quick Start
 It is recommended to install and run this library in a virtual environment.
