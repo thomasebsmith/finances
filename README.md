@@ -66,6 +66,7 @@ simulation library and CLI.
 
 ### v0.3 (in planning stages)
 - Detailed historical tax calculations (United States only)
+- Alternative minimum tax support (United States only)
 - Financial simulations based on historical market and inflation data (United
   States only)
 - Simulation performance optimizations
