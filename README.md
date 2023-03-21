@@ -69,6 +69,7 @@ simulation library and CLI.
 - Alternative minimum tax support (United States only)
 - Financial simulations based on historical market and inflation data (United
   States only)
+- Deduction and adjustment eligibility checking (United States only)
 - Simulation performance optimizations
 
 ### v0.4
