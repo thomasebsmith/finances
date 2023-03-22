@@ -70,10 +70,10 @@ simulation library and CLI.
 - Financial simulations based on historical market and inflation data (United
   States only)
 - Deduction and adjustment eligibility checking (United States only)
-- Simulation performance optimizations
 
 ### v0.4
 - Simulated financial predictions
+- Simulation performance optimizations
 - Historical prediction accuracy analysis and adjustments
 
 ## Future Ideas
