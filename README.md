@@ -80,7 +80,7 @@ simulation library and CLI.
 In future versions after v0.4, this project could include:
 - A tax calculation GUI (with interactive explanations)
 - A simulation GUI (including visualizations of possible outcomes, confidence
-  intervals, etc.)
+  intervals, tables, charts, etc.)
 - An optimizer for desired financial outcomes
 - Simulation data and tax calculations for locations outside the United States
 - Data about other types of investment assets (commodities, real estate,
