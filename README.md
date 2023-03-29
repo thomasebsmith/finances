@@ -85,6 +85,7 @@ In future versions after v0.4, this project could include:
 - Simulation data and tax calculations for locations outside the United States
 - Data about other types of investment assets (commodities, real estate,
   derivatives, etc.) integrated into the predictor and optimizer
+- Risk premium analysis
 
 ## Contributing
 To contribute to this project, please open an issue if one does not exist for
