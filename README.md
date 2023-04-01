@@ -78,7 +78,8 @@ simulation library and CLI.
 
 ## Future Ideas
 In future versions after v0.4, this project could include:
-- A tax calculation GUI (with interactive explanations)
+- A tax calculation GUI (with interactive explanations and tax strategy
+  analysis)
 - A simulation GUI (including visualizations of possible outcomes, confidence
   intervals, tables, charts, etc.)
 - An optimizer for desired financial outcomes
