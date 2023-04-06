@@ -4,8 +4,8 @@ to provide financial advice. Use it at your own risk!**
 
 This project provides a Python library and CLI that you can use for analyzing
 and simulating finances. It is designed for dealing with United States financial
-simulation and law. It includes tax estimation functionality and is being
-extended to include financial simulation functionality.
+simulation and law. It includes tax estimation functionality and financial
+simulation functionality.
 
 ## Prerequisites
 You will need:
