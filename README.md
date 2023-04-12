@@ -72,7 +72,6 @@ simulation library and CLI.
 - Deduction and adjustment eligibility checking (United States only)
 
 ### v0.4
-- Simulated financial predictions
 - Simulation performance optimizations
 - Historical prediction accuracy analysis and adjustments
 
