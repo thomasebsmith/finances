@@ -74,6 +74,7 @@ simulation library and CLI.
 ### v0.4
 - Simulation performance optimizations
 - Historical prediction accuracy analysis and adjustments
+- Accuracy checks against tax law and tax forms
 
 ## Future Ideas
 In future versions after v0.4, this project could include:
