@@ -64,7 +64,7 @@ simulation library and CLI.
   store variable distributions)
 - Thorough unit testing of basic types and simulations
 
-### v0.3 (in planning stages)
+### v0.3 (in planning stages — planned release in 2024)
 - Detailed historical tax calculations (United States only)
 - Alternative minimum tax support (United States only)
 - Financial simulations based on historical market and inflation data (United
