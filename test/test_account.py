@@ -90,3 +90,11 @@ def test_transfer() -> None:
     acct2.transfer(Money.of(251), to_account=acct)
     assert acct.balance() == Money.of(1)
     assert acct2.balance() == Money.of(0)
+
+    acct2.transfer(Money.of(0), to_account=acct)
+    assert acct.balance() == Money.of(1)
+    assert acct2.balance() == Money.of(0)
+
+    acct.transfer(Money.of(10000), to_account=acct)
+    assert acct.balance() == Money.of(1)
+    assert acct2.balance() == Money.of(0)
