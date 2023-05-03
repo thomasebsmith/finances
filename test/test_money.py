@@ -1,15 +1,15 @@
 """Tests of src/finances/money.py."""
 
 from finances import Money
-from finances.money import ZERO, NEGATIVE_ZERO
+from finances.money import NEGATIVE_ZERO
 
 
 def test_of() -> None:
     """Tests the behavior of Money.of."""
-    assert Money.of(0) == ZERO
+    assert Money.of(0) == Money.ZERO
     assert Money.of(98765) == Money(9876500)
     assert Money.of(-123) == Money(-12300)
-    assert Money.of(0, 0) == ZERO
+    assert Money.of(0, 0) == Money.ZERO
     assert Money.of(8765, 30) == Money(876530)
     assert Money.of(-314, 15) == Money(-31415)
     assert Money.of(NEGATIVE_ZERO, 46) == Money(-46)
@@ -19,14 +19,14 @@ def test_parse() -> None:
     """Tests the behavior of Money.parse."""
     assert Money.parse("$100") == Money.of(100)
     assert Money.parse("$0.34") == Money.of(0, 34)
-    assert Money.parse("$0") == ZERO
-    assert Money.parse("-$0") == ZERO
+    assert Money.parse("$0") == Money.ZERO
+    assert Money.parse("-$0") == Money.ZERO
     assert Money.parse("-$923.60") == Money.of(-923, 60)
 
 
 def test_truncated_dollars() -> None:
     """Tests the behavior of Money.truncated_dollars."""
-    assert ZERO.truncated_dollars() == 0
+    assert Money.ZERO.truncated_dollars() == 0
     assert Money.of(0, 99).truncated_dollars() == 0
     assert Money.of(101, 1).truncated_dollars() == 101
     assert Money.of(57).truncated_dollars() == 57
@@ -37,7 +37,7 @@ def test_truncated_dollars() -> None:
 
 def test_extra_cents() -> None:
     """Tests the behavior of Money.extra_cents."""
-    assert ZERO.extra_cents() == 0
+    assert Money.ZERO.extra_cents() == 0
     assert Money.of(0, 99).extra_cents() == 99
     assert Money.of(101, 1).extra_cents() == 1
     assert Money.of(57).extra_cents() == 0
@@ -49,7 +49,7 @@ def test_extra_cents() -> None:
 
 def test_all_cents() -> None:
     """Tests the behavior of Money.all_cents."""
-    assert ZERO.all_cents() == 0
+    assert Money.ZERO.all_cents() == 0
     assert Money.of(0, 51).all_cents() == 51
     assert Money.of(314, 5).all_cents() == 31405
     assert Money.of(-82).all_cents() == -8200
@@ -60,7 +60,7 @@ def test_all_cents() -> None:
 
 def test_str() -> None:
     """Tests the behavior of Money.__str__."""
-    assert str(ZERO) == "$0.00"
+    assert str(Money.ZERO) == "$0.00"
     assert str(Money.of(0, 1)) == "$0.01"
     assert str(Money.of(3, 14)) == "$3.14"
     assert str(Money.of(27, 18)) == "$27.18"
@@ -71,8 +71,8 @@ def test_str() -> None:
 
 def test_add() -> None:
     """Tests the behavior of Money.__add__."""
-    assert ZERO + Money.of(0) == ZERO
-    assert ZERO + Money.of(314, 15) == Money.of(314, 15)
+    assert Money.ZERO + Money.of(0) == Money.ZERO
+    assert Money.ZERO + Money.of(314, 15) == Money.of(314, 15)
     assert Money.of(-19, 2) + Money.of(0) == Money.of(-19, 2)
     assert Money.of(10) + Money.of(-10) == Money.of(0)
     assert Money.of(31, 15) + Money.of(-28, 26) == Money.of(2, 89)
@@ -81,7 +81,7 @@ def test_add() -> None:
 
 def test_sub() -> None:
     """Tests the behavior of Money.__sub__."""
-    assert Money.of(0) - ZERO == ZERO
+    assert Money.of(0) - Money.ZERO == Money.ZERO
     assert Money.of(6, 28) - Money.of(0) == Money.of(6, 28)
     assert Money.of(-18, 25) - Money.of(-18, 25) == Money.of(0)
     assert Money.of(29, 37) - Money.of(28, 1) == Money.of(1, 36)
@@ -92,10 +92,10 @@ def test_sub() -> None:
 
 def test_mul() -> None:
     """Tests the behavior of Money.__mul__."""
-    assert ZERO * 0 == ZERO
-    assert Money.of(268, 11) * 0 == ZERO
-    assert Money.of(-1) * 0 == ZERO
-    assert ZERO * -1 == ZERO
+    assert Money.ZERO * 0 == Money.ZERO
+    assert Money.of(268, 11) * 0 == Money.ZERO
+    assert Money.of(-1) * 0 == Money.ZERO
+    assert Money.ZERO * -1 == Money.ZERO
     assert Money.of(-314, 25) * 1 == Money.of(-314, 25)
     assert Money.of(82, 22) * -1 == Money.of(-82, 22)
     assert Money.of(-165, 40) * -3 == Money.of(496, 20)
@@ -104,10 +104,10 @@ def test_mul() -> None:
 
 def test_grow_and_round() -> None:
     """Tests the behavior of Money.grow_and_round."""
-    assert ZERO.grow_and_round(0.0) == ZERO
-    assert ZERO.grow_and_round(1.0) == Money.of(0)
-    assert Money.of(123).grow_and_round(0.0) == ZERO
-    assert Money.of(-9, 87).grow_and_round(0.0) == ZERO
+    assert Money.ZERO.grow_and_round(0.0) == Money.ZERO
+    assert Money.ZERO.grow_and_round(1.0) == Money.of(0)
+    assert Money.of(123).grow_and_round(0.0) == Money.ZERO
+    assert Money.of(-9, 87).grow_and_round(0.0) == Money.ZERO
     assert Money.of(1000, 0).grow_and_round(1.5) == Money.of(1500)
     assert Money.of(-953, 66).grow_and_round(0.782) == Money.of(-745, 76)
     assert Money.of(22000, 78).grow_and_round(12345.6789) == Money.of(

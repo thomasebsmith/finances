@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import cast, Optional
+from typing import cast, ClassVar, Optional
 
 CENTS_PER_DOLLAR = 100
 
@@ -38,6 +38,8 @@ class Money:
     """Represents an amount of U.S. dollars, positive, negative, or zero."""
 
     _cents: int
+
+    ZERO: ClassVar[Money]
 
     @staticmethod
     def of(dollars: int | _NegativeZeroMarker, cents: int = 0) -> Money:
@@ -164,4 +166,4 @@ class Money:
         return Money(round(self._cents * ratio))
 
 
-ZERO = Money.of(0)
+Money.ZERO = Money.of(0)

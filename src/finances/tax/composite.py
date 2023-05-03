@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from ..earnings import Earnings
-from ..money import Money, ZERO
+from ..money import Money
 from .tax import IncomeTax
 
 
@@ -27,4 +27,6 @@ class CompositeTax:
             earnings - The earnings to tax.
         Return value: The sum of all of self.taxes levied on earnings.
         """
-        return sum((tax.calculate(earnings) for tax in self.taxes), start=ZERO)
+        return sum(
+            (tax.calculate(earnings) for tax in self.taxes), start=Money.ZERO
+        )

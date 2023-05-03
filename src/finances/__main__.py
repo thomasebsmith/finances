@@ -5,7 +5,7 @@
 import sys
 
 from .earnings import Earnings, TaxCategory
-from .money import Money, ZERO
+from .money import Money
 from .tax import FederalIncomeTax, FICATax, FilingStatus
 from .tax.state.mi import MichiganIncomeTax
 
@@ -44,8 +44,8 @@ def print_taxes(
             TaxCategory.STATE: personal_exemption,
         },
         magi_additions={
-            TaxCategory.FEDERAL: ZERO,
-            TaxCategory.STATE: ZERO,
+            TaxCategory.FEDERAL: Money.ZERO,
+            TaxCategory.STATE: Money.ZERO,
         },
     )
     taxes = sum(
@@ -54,7 +54,7 @@ def print_taxes(
             mi_income_tax.calculate(income),
             fica.calculate(income),
         ],
-        start=ZERO,
+        start=Money.ZERO,
     )
     print(f"{year} taxes on {gross_income}: {taxes}")
 

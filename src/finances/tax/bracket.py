@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from ..earnings import Earnings, EarningsTaxPolicy
-from ..money import Money, ZERO
+from ..money import Money
 
 
 @dataclass
@@ -44,7 +44,7 @@ class BracketTax:
         Return value: The total tax, calculated by summing the amount of income
             in each tax bracket times that bracket's marginal_rate.
         """
-        tax = ZERO
+        tax = Money.ZERO
         taxable_income = earnings.taxable_income(self.policy)
         for bracket in self.brackets:
             if taxable_income > bracket.threshold:
