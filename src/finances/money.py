@@ -15,9 +15,6 @@ class _NegativeZeroMarker:
     pass
 
 
-NEGATIVE_ZERO = _NegativeZeroMarker()
-
-
 def _parse_nonnegative_int(
     int_string: str, expected_length: Optional[int] = None
 ) -> int:
@@ -40,6 +37,8 @@ class Money:
     _cents: int
 
     ZERO: ClassVar[Money]
+
+    NEGATIVE_ZERO: ClassVar[_NegativeZeroMarker]
 
     @staticmethod
     def of(dollars: int | _NegativeZeroMarker, cents: int = 0) -> Money:
@@ -167,3 +166,4 @@ class Money:
 
 
 Money.ZERO = Money.of(0)
+Money.NEGATIVE_ZERO = _NegativeZeroMarker()

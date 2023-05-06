@@ -1,7 +1,6 @@
 """Tests of src/finances/money.py."""
 
 from finances import Money
-from finances.money import NEGATIVE_ZERO
 
 
 def test_of() -> None:
@@ -12,7 +11,7 @@ def test_of() -> None:
     assert Money.of(0, 0) == Money.ZERO
     assert Money.of(8765, 30) == Money(876530)
     assert Money.of(-314, 15) == Money(-31415)
-    assert Money.of(NEGATIVE_ZERO, 46) == Money(-46)
+    assert Money.of(Money.NEGATIVE_ZERO, 46) == Money(-46)
 
 
 def test_parse() -> None:
@@ -54,7 +53,7 @@ def test_all_cents() -> None:
     assert Money.of(314, 5).all_cents() == 31405
     assert Money.of(-82).all_cents() == -8200
     assert Money.of(-1, 35).all_cents() == -135
-    assert Money.of(NEGATIVE_ZERO, 68).all_cents() == -68
+    assert Money.of(Money.NEGATIVE_ZERO, 68).all_cents() == -68
     assert Money.of(-62, 8).all_cents() == -6208
 
 
@@ -64,7 +63,7 @@ def test_str() -> None:
     assert str(Money.of(0, 1)) == "$0.01"
     assert str(Money.of(3, 14)) == "$3.14"
     assert str(Money.of(27, 18)) == "$27.18"
-    assert str(Money.of(NEGATIVE_ZERO, 35)) == "-$0.35"
+    assert str(Money.of(Money.NEGATIVE_ZERO, 35)) == "-$0.35"
     assert str(Money.of(-82, 6)) == "-$82.06"
     assert str(Money.of(-20)) == "-$20.00"
 

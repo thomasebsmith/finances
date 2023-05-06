@@ -1,7 +1,6 @@
 """Tests of src/simulate/account.py."""
 
 from finances import Money, Value
-from finances.money import NEGATIVE_ZERO
 from simulate.account import Account
 
 
@@ -38,7 +37,7 @@ def test_subtract() -> None:
     acct = Account(Money.of(-123))
     acct -= Money.of(678, 31)
     assert acct.balance() == Money.of(-801, 31)
-    acct -= Money.of(NEGATIVE_ZERO, 60)
+    acct -= Money.of(Money.NEGATIVE_ZERO, 60)
     assert acct.balance() == Money.of(-800, 71)
 
     acct2 = Account(
