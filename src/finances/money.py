@@ -8,11 +8,19 @@ from typing import cast, ClassVar, Optional
 CENTS_PER_DOLLAR = 100
 
 
+# The digits 0-9 as strings
 _DIGITS = frozenset(map(str, range(0, 10)))
 
 
 class _NegativeZeroMarker:
-    pass
+    """
+    A class that represents negative zero in Money.of().
+
+    Do not instantiate! Use Money.NEGATIVE_ZERO instead.
+    """
+
+
+_NEGATIVE_ZERO = _NegativeZeroMarker()
 
 
 def _parse_nonnegative_int(
@@ -56,7 +64,7 @@ class Money:
         if not 0 <= cents < CENTS_PER_DOLLAR:
             raise ValueError(f"cents must be between 0 and {CENTS_PER_DOLLAR}")
 
-        is_negative_zero = isinstance(dollars, _NegativeZeroMarker)
+        is_negative_zero = dollars == _NEGATIVE_ZERO
         num_dollars = 0 if is_negative_zero else cast(int, dollars)
 
         if is_negative_zero or num_dollars < 0:
@@ -166,4 +174,4 @@ class Money:
 
 
 Money.ZERO = Money.of(0)
-Money.NEGATIVE_ZERO = _NegativeZeroMarker()
+Money.NEGATIVE_ZERO = _NEGATIVE_ZERO
