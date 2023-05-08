@@ -12,6 +12,7 @@ def test_of() -> None:
     assert Money.of(8765, 30) == Money(876530)
     assert Money.of(-314, 15) == Money(-31415)
     assert Money.of(Money.NEGATIVE_ZERO, 46) == Money(-46)
+    assert Money.of(Money.NEGATIVE_ZERO, 0) == Money.ZERO
 
 
 def test_parse() -> None:
