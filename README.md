@@ -15,8 +15,8 @@ You will need:
 - POSIX-compatible sh (to run the provided scripts)
 
 ## Quick Start
-It is recommended (but not required) to install and run this library in a
-virtual environment.
+It's recommended (but not required) to install and run this library in a virtual
+environment.
 
 To run an example program that uses this library (this will automatically
 create and use a virtual environment):
