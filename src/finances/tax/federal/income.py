@@ -109,7 +109,7 @@ class FederalIncomeTax(BracketTax):
         Creates a FederalIncomeTax.
 
         Arguments:
-            year - The tax year.
+            year - The tax year (currently, 2021 and 2022 are available).
             filing_status - The tax filer's filing status.
         """
         assert year in BRACKETS_BY_YEAR, f"No tax data for year {year}"
