@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
-MICHIGAN_INCOME_TAX_RATE = 0.0425
-
-MICHIGAN_TAX_DATA_YEARS: set[int] = {2021, 2022}
+MICHIGAN_INCOME_TAX_RATE_BY_YEAR: dict[int, float] = {
+    2021: 0.0425,
+    2022: 0.0425,
+    2023: 0.0405,
+}
