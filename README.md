@@ -7,6 +7,9 @@ and simulating finances. It is designed for dealing with United States financial
 simulation and law. It includes tax estimation functionality and financial
 simulation functionality.
 
+Currently, tax rates are available for tax years 2021 and 2022, with 2023
+brackets currently being added.
+
 ## Prerequisites
 You will need:
 - Git (to clone this repository)
