@@ -98,6 +98,8 @@ your desired feature or bug fix. Then, feel free to comment that you are working
 on that issue and create a corresponding PR. Your PR will be reviewed and
 hopefully approved for merge when it is ready.
 
+Contributions to this project will be licensed under the MIT License.
+
 ## License
 This project is licensed as open source software under the MIT License. See
 [LICENSE](./LICENSE) for details.
