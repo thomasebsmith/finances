@@ -57,7 +57,7 @@ simulation library and CLI.
 - Placeholder simulation utility
 - Basic testing and linting
 
-### v0.2 (in progress — planned release on 2023-08-01)
+### v0.2 (in progress — planned release on 2024-04-01)
 - Correct use of tax terminology (AGI vs. MAGI vs. taxable income, deductions
   vs. adjustments) in API
 - Basic financial simulations (inflation, investment returns, etc.)
