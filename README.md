@@ -8,7 +8,7 @@ simulation and law. It includes tax estimation functionality and financial
 simulation functionality.
 
 Currently, tax rates are available for tax years 2021 and 2022, with 2023
-brackets currently being added.
+and 2024 brackets currently being added.
 
 ## Prerequisites
 You will need:
